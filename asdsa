@@ -1,0 +1,1074 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jun 01, 2018 at 11:10 PM
+-- Server version: 5.6.38-log
+-- PHP Version: 5.6.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `borneope_posc2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `balance_history`
+--
+
+CREATE TABLE `balance_history` (
+  `id` int(10) NOT NULL,
+  `username` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `action` enum('Add Balance','Cut Balance','Other') COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `price` int(10) NOT NULL,
+  `msg` text COLLATE utf8_swedish_ci NOT NULL,
+  `date` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `time` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `balance_history`
+--
+
+INSERT INTO `balance_history` (`id`, `username`, `action`, `quantity`, `price`, `msg`, `date`, `time`) VALUES
+(1, 'deltonja', 'Cut Balance', 0, 1000, 'Membuat pesanan pulsa. #ID Pesanan: 7657534', '2018-05-30', '10:17:35'),
+(2, 'deltonja', 'Cut Balance', 0, 1000, 'Membuat pesanan pulsa. #ID Pesanan: 9830184', '2018-05-30', '10:24:52'),
+(3, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 8821786', '2018-05-30', '12:12:40'),
+(4, 'deltonja', 'Cut Balance', 100, 100, 'Membuat pesanan sosmed. #ID Pesanan: 8413999', '2018-05-30', '12:16:42'),
+(5, 'deltonja', 'Cut Balance', 100, 100, 'Membuat pesanan sosmed. #ID Pesanan: 8091055', '2018-05-30', '12:21:21'),
+(6, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 1931561', '2018-05-30', '12:37:35'),
+(7, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 3305350', '2018-05-30', '12:38:43'),
+(8, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 3140027', '2018-05-30', '12:38:51'),
+(9, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 9236744', '2018-05-30', '12:41:33'),
+(10, 'demov1', 'Cut Balance', 50000, 70000, 'Membuat akun Admin. #Username: sealamo', '2018-06-01', '17:50:08'),
+(11, 'demov1', 'Cut Balance', 2147483647, 2147483647, 'Mentransfer Saldo kepada #Username: sealamo', '2018-06-01', '17:50:27'),
+(12, 'sealamo', 'Add Balance', 2147483647, 2147483647, 'Mendapatkan Penambahan Saldo dari #Username: demov1', '2018-06-01', '17:50:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `berita`
+--
+
+CREATE TABLE `berita` (
+  `id` int(11) NOT NULL,
+  `isi` text NOT NULL,
+  `tanggal` date NOT NULL,
+  `jenis` enum('INFO','WARNING','UPDATE') NOT NULL,
+  `warna` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deposit`
+--
+
+CREATE TABLE `deposit` (
+  `id` int(10) NOT NULL,
+  `code` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `username` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `method` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `balance` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `status` enum('Success','Pending','Error','') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `deposit`
+--
+
+INSERT INTO `deposit` (`id`, `code`, `username`, `method`, `quantity`, `balance`, `status`, `date`) VALUES
+(1, 'y68axbg9nR877hLFozqs', 'admin', 'TELKOMSEL-0812', '10000', '10000', 'Success', '2017-12-07'),
+(2, 'YHseuNXFB8P6nEnN0MES', 'admin', 'TELKOMSEL-0016', '50000', '50000', 'Pending', '2018-05-26'),
+(3, 'pyZSNiAFj8cgyv9cXDSS', 'admin', 'TELKOMSEL-0016', '1000000', '1000000', 'Pending', '2018-05-26'),
+(6, 'P5Pena2MqwJHSXtaH7in', 'deltonja', 'TELKOMSEL-0016', '10000', '10000', 'Success', '2018-05-29'),
+(7, 'V8CrAU1adqAjx8ASSyS1', 'deltonja', 'TELKOMSEL-0016', '10000', '10000', 'Success', '2018-05-29'),
+(8, 'x443lL8wbjM4Km0Av1Z6', 'deltonja', 'TELKOMSEL-0016', '10000', '10000', 'Success', '2018-05-29'),
+(9, 'QdbvgDxTCfVZXZzMBI5q', 'deltonja', 'TELKOMSEL-0016', '10000', '8000', 'Success', '2018-05-29'),
+(10, 'QXKvA1PaRya6f0wedBFB', 'deltonja', 'TELKOMSEL-0016', '10000', '8000', 'Success', '2018-05-29'),
+(11, 'ynp0FNsdFjOzcPZ5mdAZ', 'deltonja', 'TELKOMSEL-0016', '10000', '8000', 'Success', '2018-05-29'),
+(12, '2xlKkmCsz0kXCnuKXtFz', 'deltonja', 'TELKOMSEL-00171', '10000', '8000', 'Success', '2018-05-30'),
+(13, 'gRdcuGpzLwz2UF49yhi5', 'jhonsgb', 'TELKOMSEL-00171', '20000', '16000', 'Success', '2018-05-31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deposits_history`
+--
+
+CREATE TABLE `deposits_history` (
+  `id` int(11) NOT NULL,
+  `code` varchar(250) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(250) NOT NULL,
+  `method` varchar(250) NOT NULL,
+  `no_sender` varchar(250) NOT NULL,
+  `quantity` varchar(250) NOT NULL,
+  `get_balance` varchar(250) NOT NULL,
+  `status` varchar(250) NOT NULL,
+  `date` date NOT NULL,
+  `time` varchar(50) NOT NULL,
+  `type` enum('WEB','API','REG') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deposit_method`
+--
+
+CREATE TABLE `deposit_method` (
+  `id` int(10) NOT NULL,
+  `name` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `payment` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `rate` varchar(250) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `deposit_method`
+--
+
+INSERT INTO `deposit_method` (`id`, `name`, `payment`, `rate`) VALUES
+(18, 'BCA-0016', 'BCA 085349680016/JHON', '1'),
+(19, 'TELKOMSEL-00171', 'TELKOMSEL 08534968001772', '0.8');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ip`
+--
+
+CREATE TABLE `ip` (
+  `id` int(10) NOT NULL,
+  `username` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `ip` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `ip`
+--
+
+INSERT INTO `ip` (`id`, `username`, `ip`) VALUES
+(1, 'jhonsgb', '110.139.135.38'),
+(2, 'Jhonn', '182.1.202.169');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(10) NOT NULL,
+  `date` date NOT NULL,
+  `content` text COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `date`, `content`) VALUES
+(1, '2018-05-29', 'Order Script ini? Silahkan Chat <a href=\"https://facebook.com/jhonnborneo\">Jhon Delton</a>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `poid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `link` text COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `remains` int(10) NOT NULL,
+  `start_count` int(10) NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Checking','Pending','Processing','Error','Partial','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `provider` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `place_from` enum('WEB','API') COLLATE utf8_swedish_ci NOT NULL,
+  `refund` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `oid`, `poid`, `user`, `service`, `link`, `quantity`, `remains`, `start_count`, `price`, `status`, `date`, `provider`, `place_from`, `refund`) VALUES
+(1, '123456', '29433774', 'deltonja', 'Instagram Likes', 'jhonsgb', 1000, 0, 0, 1000, 'Pending', '2018-05-29', 'JAP', 'WEB', 0),
+(2, '12345678', '489140', 'deltonja', 'Instagram Likes', 'jhonsgb', 100, 4000, 0, 1000, 'Processing', '2018-05-29', 'IRVAN', 'WEB', 0),
+(3, '8413999', '501227', 'deltonja', 'Instagram Likes Server 1', 'jhonsgb', 100, 0, 0, 100, 'Pending', '2018-05-30', 'IRVAN', 'WEB', 0),
+(4, '1212121', '1313', '1313', '1313', '1313131', 3131, 1313, 1313, 1000, 'Pending', '2018-06-28', 'A', 'WEB', 0),
+(5, '8091055', '501270', 'deltonja', 'Instagram Likes Server 1', 'jhonnsgb', 100, 0, 0, 100, 'Pending', '2018-05-30', 'IRVAN', 'WEB', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_dm`
+--
+
+CREATE TABLE `orders_dm` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `poid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `link` text COLLATE utf8_swedish_ci NOT NULL,
+  `nickname` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Checking','Pending','Processing','Error','Partial','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `provider` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `place_from` enum('WEB','API') COLLATE utf8_swedish_ci NOT NULL,
+  `refund` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_line`
+--
+
+CREATE TABLE `orders_line` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `note` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` double NOT NULL,
+  `status` enum('Pending','Processing','Error','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `place_from` varchar(50) COLLATE utf8_swedish_ci NOT NULL DEFAULT 'WEB'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_pulsa`
+--
+
+CREATE TABLE `orders_pulsa` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `poid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `link` text COLLATE utf8_swedish_ci NOT NULL,
+  `sn` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Checking','Pending','Processing','Error','Partial','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `provider` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `place_from` enum('WEB','API') COLLATE utf8_swedish_ci NOT NULL,
+  `refund` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `orders_pulsa`
+--
+
+INSERT INTO `orders_pulsa` (`id`, `oid`, `poid`, `user`, `service`, `link`, `sn`, `price`, `status`, `date`, `provider`, `place_from`, `refund`) VALUES
+(1, '7657534', '96018', 'deltonja', 'Tri 1K', '085349680016', 'Sedang diproses..', 1000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(2, '9830184', '26939', 'deltonja', 'Tri 1K', '085349680016', 'Sedang diproses..', 1000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(3, '8821786', '39267', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(4, '1931561', '87001', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(5, '3305350', '80629', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(6, '3140027', '31941', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(7, '9236744', '25879', 'deltonja', 'Telkomsel 5K', '085349680016', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pesan_tsel`
+--
+
+CREATE TABLE `pesan_tsel` (
+  `id` int(11) NOT NULL,
+  `isi` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `status` enum('UNREAD','READ') NOT NULL,
+  `date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provider`
+--
+
+CREATE TABLE `provider` (
+  `id` int(10) NOT NULL,
+  `code` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `link` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `api_key` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `provider`
+--
+
+INSERT INTO `provider` (`id`, `code`, `link`, `api_key`) VALUES
+(1, 'IRVAN', 'https://irvankede-smm.co.id/api/status', '#');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provider_portal`
+--
+
+CREATE TABLE `provider_portal` (
+  `id` int(10) NOT NULL,
+  `code` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `link` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `userid` varchar(300) COLLATE utf8_swedish_ci NOT NULL,
+  `userkey` varchar(300) COLLATE utf8_swedish_ci NOT NULL,
+  `usersecret` varchar(300) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `provider_portal`
+--
+
+INSERT INTO `provider_portal` (`id`, `code`, `link`, `userid`, `userkey`, `usersecret`) VALUES
+(1, 'BORNEO', 'https://borneopedia-smm.com/api/pulsa.php', '#', '#', '#');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `register_key`
+--
+
+CREATE TABLE `register_key` (
+  `id` int(11) NOT NULL,
+  `register_key` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `register_key`
+--
+
+INSERT INTO `register_key` (`id`, `register_key`, `status`) VALUES
+(3, 'W23WWMALO1', 'Active'),
+(4, 'QN9E76LBPX', 'Active'),
+(5, 'YXVTG8X51M', 'Active'),
+(6, '6PXXLGQ6BP', 'Active'),
+(8, 'OQLQTGNHUH', 'Active'),
+(9, '7DH5Z31T8F', 'Active'),
+(10, 'W8TPYCRYGJ', 'Active'),
+(11, 'WZY7Q6LN5L', 'Active'),
+(12, 'RBYVRQ5KLL', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `type` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `service` text COLLATE utf8_swedish_ci NOT NULL,
+  `note` text COLLATE utf8_swedish_ci NOT NULL,
+  `min` int(10) NOT NULL,
+  `max` int(10) NOT NULL,
+  `price` double NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL,
+  `pid` int(10) NOT NULL,
+  `provider` text COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `sid`, `category`, `type`, `service`, `note`, `min`, `max`, `price`, `status`, `pid`, `provider`) VALUES
+(1, 1, '1', 'Instagram', 'Instagram Likes Server 1', 'Username Only!', 100, 10000, 1000, 'Active', 9, 'IRVAN');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_dm`
+--
+
+CREATE TABLE `services_dm` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `type` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `service` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` double NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL,
+  `pid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `provider` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_line`
+--
+
+CREATE TABLE `services_line` (
+  `id` int(10) NOT NULL,
+  `category` int(10) NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_pulsa`
+--
+
+CREATE TABLE `services_pulsa` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `service` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL,
+  `pid` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `provider` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `services_pulsa`
+--
+
+INSERT INTO `services_pulsa` (`id`, `sid`, `category`, `type`, `service`, `price`, `status`, `pid`, `provider`) VALUES
+(1, 1, '1', 'Pulsa', 'Tri 1K', 1000, 'Active', '3', 'PP'),
+(2, 2, '19', 'Pulsa', 'Telkomsel 5K', 5000, 'Active', '5', 'PP');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_pulsas`
+--
+
+CREATE TABLE `services_pulsas` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `service` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL,
+  `pid` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `provider` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_cat`
+--
+
+CREATE TABLE `service_cat` (
+  `id` int(10) NOT NULL,
+  `name` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `code` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `service_cat`
+--
+
+INSERT INTO `service_cat` (`id`, `name`, `code`, `status`) VALUES
+(1, 'Instagram Likes, Views & Comment', 'SM', 'Active'),
+(2, 'Instagram Followers', 'SM', 'Active'),
+(3, 'Musically', 'SM', 'Active'),
+(4, 'Youtube', 'SM', 'Active'),
+(5, 'SoundCloud', 'SM', 'Active'),
+(6, 'Spotify', 'SM', 'Active'),
+(7, 'Vine', 'SM', 'Active'),
+(8, 'Pinterest', 'SM', 'Active'),
+(9, 'Facebook', 'SM', 'Active'),
+(10, 'Twitter', 'SM', 'Active'),
+(11, 'Indosat', 'PI', 'Active'),
+(12, 'Telkomsel', 'PI', 'Active'),
+(13, 'Tri', 'PI', 'Active'),
+(14, 'Axis', 'PI', 'Active'),
+(15, 'XL', 'PI', 'Active'),
+(16, 'Bolt', 'PI', 'Active'),
+(17, 'Smartfren', 'PI', 'Active'),
+(18, 'Indosat', 'PR', 'Active'),
+(19, 'Telkomsel', 'PR', 'Active'),
+(20, 'Tri', 'PR', 'Active'),
+(21, 'Axis', 'PR', 'Active'),
+(22, 'XL', 'PR', 'Active'),
+(23, 'Bolt', 'PR', 'Active'),
+(24, 'Smartfren', 'PR', 'Active'),
+(25, 'Token PLN', 'PLN', 'Active'),
+(26, 'Garena Shell', 'VG', 'Active'),
+(27, 'Gemscool Cash', 'VG', 'Active'),
+(28, 'Steam Wallet', 'VG', 'Active'),
+(29, 'Lyto', 'VG', 'Active'),
+(30, 'Saldo Grab', 'STO', 'Active'),
+(31, 'Saldo Gojek', 'STO', 'Active'),
+(32, 'Megaxus', 'VG', 'Active'),
+(33, 'Digicash', 'VG', 'Active'),
+(34, 'Diamond', 'ML', 'Active'),
+(35, 'Google Play', 'VG', 'Active'),
+(36, 'Telkomsel', 'PSMS', 'Active'),
+(37, 'Indosat', 'PSMS', 'Active'),
+(38, 'XL', 'PSMS', 'Active'),
+(39, 'UniPin', 'VG', 'Active'),
+(40, 'Starlight Member', 'SML', 'Active'),
+(41, 'Stiker Line', 'LINE', 'Active'),
+(42, 'Lainnya', 'O', 'Active'),
+(43, 'Tri', 'PSMS', 'Active'),
+(44, 'Xbox Live Gift Card', 'VG', 'Active'),
+(45, 'Game facebook - Boyaa Poker', 'VG', 'Active'),
+(46, 'Instagram Likes Gratis', 'SM', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_rate`
+--
+
+CREATE TABLE `service_rate` (
+  `id` int(10) NOT NULL,
+  `code` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `rate` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `profit` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `id` int(10) NOT NULL,
+  `name` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `contact` varchar(1000) COLLATE utf8_swedish_ci NOT NULL,
+  `level` enum('Admin','Reseller') COLLATE utf8_swedish_ci NOT NULL,
+  `pict` text COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`id`, `name`, `contact`, `level`, `pict`) VALUES
+(1, 'KEPO', '69', 'Admin', 'http://www.anawalls.com/images/animals/baby-cub-monkey.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(10) NOT NULL,
+  `user` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `subject` varchar(200) COLLATE utf8_swedish_ci NOT NULL,
+  `message` text COLLATE utf8_swedish_ci NOT NULL,
+  `datetime` datetime NOT NULL,
+  `last_update` datetime NOT NULL,
+  `status` enum('Pending','Responded','Closed','Waiting') COLLATE utf8_swedish_ci NOT NULL,
+  `seen_user` enum('0','1') COLLATE utf8_swedish_ci NOT NULL,
+  `seen_admin` enum('0','1') COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `user`, `subject`, `message`, `datetime`, `last_update`, `status`, `seen_user`, `seen_admin`) VALUES
+(1, 'jhonsgb', 'jhjh1', 'hytrf', '2018-05-31 02:28:10', '2018-05-31 02:28:38', 'Responded', '0', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets_message`
+--
+
+CREATE TABLE `tickets_message` (
+  `id` int(10) NOT NULL,
+  `ticket_id` int(10) NOT NULL,
+  `sender` enum('Member','Admin') COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `message` text COLLATE utf8_swedish_ci NOT NULL,
+  `datetime` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `tickets_message`
+--
+
+INSERT INTO `tickets_message` (`id`, `ticket_id`, `sender`, `user`, `message`, `datetime`) VALUES
+(1, 1, 'Admin', 'jhonsgb', 'Okey', '2018-05-31 02:28:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `top_user`
+--
+
+CREATE TABLE `top_user` (
+  `id` int(11) NOT NULL,
+  `method` enum('Deposit','Order') NOT NULL,
+  `username` varchar(200) NOT NULL,
+  `jumlah` int(10) NOT NULL,
+  `total` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `top_user`
+--
+
+INSERT INTO `top_user` (`id`, `method`, `username`, `jumlah`, `total`) VALUES
+(1, 'Deposit', 'deltonja', 50400, '6'),
+(2, 'Order', 'deltonja', 20100, '5'),
+(3, 'Deposit', 'jhonsgb', 16000, '1'),
+(4, 'Deposit', 'sealamo', 2147483647, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transfer_balance`
+--
+
+CREATE TABLE `transfer_balance` (
+  `id` int(10) NOT NULL,
+  `sender` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `receiver` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` double NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `transfer_balance`
+--
+
+INSERT INTO `transfer_balance` (`id`, `sender`, `receiver`, `quantity`, `date`) VALUES
+(1, 'demov1', 'sealamo', 899999929999, '2018-06-01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) NOT NULL,
+  `username` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `balance` double NOT NULL,
+  `level` enum('Member','Agen','Reseller','Admin','Developers') COLLATE utf8_swedish_ci NOT NULL,
+  `registered` date NOT NULL,
+  `status` enum('Active','Suspended') COLLATE utf8_swedish_ci NOT NULL,
+  `api_key` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `uplink` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `balance`, `level`, `registered`, `status`, `api_key`, `uplink`) VALUES
+(2, 'samrey91', 'samrey91', 'samreysteven91@gmail.com', 16000, 'Developers', '2018-05-28', 'Active', 'gVQWrV5cilpNcM3xDIWl', 'Server'),
+(3, 'demov1', '123123', 'delton01809@gmail.com', 0, 'Developers', '2018-05-29', 'Active', 'oP27Jt1M8qDvIgS5Fizd', 'jhonsgb'),
+(4, 'sealamo', '123123', 'sealamo123@gmail.com', 899999979999, 'Admin', '2018-06-01', 'Active', 'Bbb4Guub2v8o5xnHHGVG', 'demov1'),
+(5, 'Jhonn', 'jhonn', 'delton018@gmail.com', 0, 'Member', '2018-06-01', 'Active', 'TFtNfu7p6OTvqAOdd1ui', 'Server');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userss`
+--
+
+CREATE TABLE `userss` (
+  `id` int(10) NOT NULL,
+  `username` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `balance` double NOT NULL,
+  `level` enum('Member','Agen','Reseller','Admin','Developers') COLLATE utf8_swedish_ci NOT NULL,
+  `registered` date NOT NULL,
+  `status` enum('Active','Suspended') COLLATE utf8_swedish_ci NOT NULL,
+  `api_key` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `uplink` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `balance_history`
+--
+ALTER TABLE `balance_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `berita`
+--
+ALTER TABLE `berita`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deposit`
+--
+ALTER TABLE `deposit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deposits_history`
+--
+ALTER TABLE `deposits_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deposit_method`
+--
+ALTER TABLE `deposit_method`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ip`
+--
+ALTER TABLE `ip`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders_dm`
+--
+ALTER TABLE `orders_dm`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders_line`
+--
+ALTER TABLE `orders_line`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders_pulsa`
+--
+ALTER TABLE `orders_pulsa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pesan_tsel`
+--
+ALTER TABLE `pesan_tsel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `provider`
+--
+ALTER TABLE `provider`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `provider_portal`
+--
+ALTER TABLE `provider_portal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `register_key`
+--
+ALTER TABLE `register_key`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_dm`
+--
+ALTER TABLE `services_dm`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_line`
+--
+ALTER TABLE `services_line`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_pulsa`
+--
+ALTER TABLE `services_pulsa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_pulsas`
+--
+ALTER TABLE `services_pulsas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `service_cat`
+--
+ALTER TABLE `service_cat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `service_rate`
+--
+ALTER TABLE `service_rate`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tickets_message`
+--
+ALTER TABLE `tickets_message`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `top_user`
+--
+ALTER TABLE `top_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transfer_balance`
+--
+ALTER TABLE `transfer_balance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `userss`
+--
+ALTER TABLE `userss`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `balance_history`
+--
+ALTER TABLE `balance_history`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `berita`
+--
+ALTER TABLE `berita`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `deposit`
+--
+ALTER TABLE `deposit`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `deposits_history`
+--
+ALTER TABLE `deposits_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `deposit_method`
+--
+ALTER TABLE `deposit_method`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `ip`
+--
+ALTER TABLE `ip`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `orders_dm`
+--
+ALTER TABLE `orders_dm`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders_line`
+--
+ALTER TABLE `orders_line`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders_pulsa`
+--
+ALTER TABLE `orders_pulsa`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `pesan_tsel`
+--
+ALTER TABLE `pesan_tsel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `provider`
+--
+ALTER TABLE `provider`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `provider_portal`
+--
+ALTER TABLE `provider_portal`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `register_key`
+--
+ALTER TABLE `register_key`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `services_dm`
+--
+ALTER TABLE `services_dm`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `services_line`
+--
+ALTER TABLE `services_line`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `services_pulsa`
+--
+ALTER TABLE `services_pulsa`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `services_pulsas`
+--
+ALTER TABLE `services_pulsas`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `service_cat`
+--
+ALTER TABLE `service_cat`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tickets_message`
+--
+ALTER TABLE `tickets_message`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `top_user`
+--
+ALTER TABLE `top_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `transfer_balance`
+--
+ALTER TABLE `transfer_balance`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `userss`
+--
+ALTER TABLE `userss`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
