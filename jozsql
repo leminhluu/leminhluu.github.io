@@ -1,0 +1,1309 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jun 01, 2018 at 11:10 PM
+-- Server version: 5.6.38-log
+-- PHP Version: 5.6.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `borneope_posc2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `balance_history`
+--
+
+CREATE TABLE `balance_history` (
+  `id` int(10) NOT NULL,
+  `username` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `action` enum('Add Balance','Cut Balance','Other') COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `price` int(10) NOT NULL,
+  `msg` text COLLATE utf8_swedish_ci NOT NULL,
+  `date` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `time` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `balance_history`
+--
+
+INSERT INTO `balance_history` (`id`, `username`, `action`, `quantity`, `price`, `msg`, `date`, `time`) VALUES
+(1, 'deltonja', 'Cut Balance', 0, 1000, 'Membuat pesanan pulsa. #ID Pesanan: 7657534', '2018-05-30', '10:17:35'),
+(2, 'deltonja', 'Cut Balance', 0, 1000, 'Membuat pesanan pulsa. #ID Pesanan: 9830184', '2018-05-30', '10:24:52'),
+(3, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 8821786', '2018-05-30', '12:12:40'),
+(4, 'deltonja', 'Cut Balance', 100, 100, 'Membuat pesanan sosmed. #ID Pesanan: 8413999', '2018-05-30', '12:16:42'),
+(5, 'deltonja', 'Cut Balance', 100, 100, 'Membuat pesanan sosmed. #ID Pesanan: 8091055', '2018-05-30', '12:21:21'),
+(6, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 1931561', '2018-05-30', '12:37:35'),
+(7, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 3305350', '2018-05-30', '12:38:43'),
+(8, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 3140027', '2018-05-30', '12:38:51'),
+(9, 'deltonja', 'Cut Balance', 0, 5000, 'Membuat pesanan pulsa. #ID Pesanan: 9236744', '2018-05-30', '12:41:33'),
+(10, 'demov1', 'Cut Balance', 50000, 70000, 'Membuat akun Admin. #Username: sealamo', '2018-06-01', '17:50:08'),
+(11, 'demov1', 'Cut Balance', 2147483647, 2147483647, 'Mentransfer Saldo kepada #Username: sealamo', '2018-06-01', '17:50:27'),
+(12, 'sealamo', 'Add Balance', 2147483647, 2147483647, 'Mendapatkan Penambahan Saldo dari #Username: demov1', '2018-06-01', '17:50:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `berita`
+--
+
+CREATE TABLE `berita` (
+  `id` int(11) NOT NULL,
+  `isi` text NOT NULL,
+  `tanggal` date NOT NULL,
+  `jenis` enum('INFO','WARNING','UPDATE') NOT NULL,
+  `warna` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deposit`
+--
+
+CREATE TABLE `deposit` (
+  `id` int(10) NOT NULL,
+  `code` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `username` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `method` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `balance` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `status` enum('Success','Pending','Error','') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `deposit`
+--
+
+INSERT INTO `deposit` (`id`, `code`, `username`, `method`, `quantity`, `balance`, `status`, `date`) VALUES
+(1, 'y68axbg9nR877hLFozqs', 'admin', 'TELKOMSEL-0812', '10000', '10000', 'Success', '2017-12-07'),
+(2, 'YHseuNXFB8P6nEnN0MES', 'admin', 'TELKOMSEL-0016', '50000', '50000', 'Pending', '2018-05-26'),
+(3, 'pyZSNiAFj8cgyv9cXDSS', 'admin', 'TELKOMSEL-0016', '1000000', '1000000', 'Pending', '2018-05-26'),
+(6, 'P5Pena2MqwJHSXtaH7in', 'deltonja', 'TELKOMSEL-0016', '10000', '10000', 'Success', '2018-05-29'),
+(7, 'V8CrAU1adqAjx8ASSyS1', 'deltonja', 'TELKOMSEL-0016', '10000', '10000', 'Success', '2018-05-29'),
+(8, 'x443lL8wbjM4Km0Av1Z6', 'deltonja', 'TELKOMSEL-0016', '10000', '10000', 'Success', '2018-05-29'),
+(9, 'QdbvgDxTCfVZXZzMBI5q', 'deltonja', 'TELKOMSEL-0016', '10000', '8000', 'Success', '2018-05-29'),
+(10, 'QXKvA1PaRya6f0wedBFB', 'deltonja', 'TELKOMSEL-0016', '10000', '8000', 'Success', '2018-05-29'),
+(11, 'ynp0FNsdFjOzcPZ5mdAZ', 'deltonja', 'TELKOMSEL-0016', '10000', '8000', 'Success', '2018-05-29'),
+(12, '2xlKkmCsz0kXCnuKXtFz', 'deltonja', 'TELKOMSEL-00171', '10000', '8000', 'Success', '2018-05-30'),
+(13, 'gRdcuGpzLwz2UF49yhi5', 'jhonsgb', 'TELKOMSEL-00171', '20000', '16000', 'Success', '2018-05-31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deposits_history`
+--
+
+CREATE TABLE `deposits_history` (
+  `id` int(11) NOT NULL,
+  `code` varchar(250) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(250) NOT NULL,
+  `method` varchar(250) NOT NULL,
+  `no_sender` varchar(250) NOT NULL,
+  `quantity` varchar(250) NOT NULL,
+  `get_balance` varchar(250) NOT NULL,
+  `status` varchar(250) NOT NULL,
+  `date` date NOT NULL,
+  `time` varchar(50) NOT NULL,
+  `type` enum('WEB','API','REG') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deposit_method`
+--
+
+CREATE TABLE `deposit_method` (
+  `id` int(10) NOT NULL,
+  `name` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `payment` varchar(250) COLLATE utf8_swedish_ci NOT NULL,
+  `rate` varchar(250) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `deposit_method`
+--
+
+INSERT INTO `deposit_method` (`id`, `name`, `payment`, `rate`) VALUES
+(18, 'BCA-0016', 'BCA 085349680016/JHON', '1'),
+(19, 'TELKOMSEL-00171', 'TELKOMSEL 08534968001772', '0.8');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ip`
+--
+
+CREATE TABLE `ip` (
+  `id` int(10) NOT NULL,
+  `username` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `ip` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `ip`
+--
+
+INSERT INTO `ip` (`id`, `username`, `ip`) VALUES
+(1, 'jhonsgb', '110.139.135.38'),
+(2, 'Jhonn', '182.1.202.169');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(10) NOT NULL,
+  `date` date NOT NULL,
+  `content` text COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `date`, `content`) VALUES
+(1, '2018-05-29', 'Order Script ini? Silahkan Chat <a href=\"https://facebook.com/jhonnborneo\">Jhon Delton</a>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `poid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `link` text COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `remains` int(10) NOT NULL,
+  `start_count` int(10) NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Checking','Pending','Processing','Error','Partial','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `provider` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `place_from` enum('WEB','API') COLLATE utf8_swedish_ci NOT NULL,
+  `refund` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `oid`, `poid`, `user`, `service`, `link`, `quantity`, `remains`, `start_count`, `price`, `status`, `date`, `provider`, `place_from`, `refund`) VALUES
+(1, '123456', '29433774', 'deltonja', 'Instagram Likes', 'jhonsgb', 1000, 0, 0, 1000, 'Pending', '2018-05-29', 'JAP', 'WEB', 0),
+(2, '12345678', '489140', 'deltonja', 'Instagram Likes', 'jhonsgb', 100, 4000, 0, 1000, 'Processing', '2018-05-29', 'IRVAN', 'WEB', 0),
+(3, '8413999', '501227', 'deltonja', 'Instagram Likes Server 1', 'jhonsgb', 100, 0, 0, 100, 'Pending', '2018-05-30', 'IRVAN', 'WEB', 0),
+(4, '1212121', '1313', '1313', '1313', '1313131', 3131, 1313, 1313, 1000, 'Pending', '2018-06-28', 'A', 'WEB', 0),
+(5, '8091055', '501270', 'deltonja', 'Instagram Likes Server 1', 'jhonnsgb', 100, 0, 0, 100, 'Pending', '2018-05-30', 'IRVAN', 'WEB', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_dm`
+--
+
+CREATE TABLE `orders_dm` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `poid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `link` text COLLATE utf8_swedish_ci NOT NULL,
+  `nickname` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Checking','Pending','Processing','Error','Partial','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `provider` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `place_from` enum('WEB','API') COLLATE utf8_swedish_ci NOT NULL,
+  `refund` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_line`
+--
+
+CREATE TABLE `orders_line` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `note` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` double NOT NULL,
+  `status` enum('Pending','Processing','Error','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `place_from` varchar(50) COLLATE utf8_swedish_ci NOT NULL DEFAULT 'WEB'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_pulsa`
+--
+
+CREATE TABLE `orders_pulsa` (
+  `id` int(10) NOT NULL,
+  `oid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `poid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `link` text COLLATE utf8_swedish_ci NOT NULL,
+  `sn` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Checking','Pending','Processing','Error','Partial','Success') COLLATE utf8_swedish_ci NOT NULL,
+  `date` date NOT NULL,
+  `provider` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `place_from` enum('WEB','API') COLLATE utf8_swedish_ci NOT NULL,
+  `refund` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `orders_pulsa`
+--
+
+INSERT INTO `orders_pulsa` (`id`, `oid`, `poid`, `user`, `service`, `link`, `sn`, `price`, `status`, `date`, `provider`, `place_from`, `refund`) VALUES
+(1, '7657534', '96018', 'deltonja', 'Tri 1K', '085349680016', 'Sedang diproses..', 1000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(2, '9830184', '26939', 'deltonja', 'Tri 1K', '085349680016', 'Sedang diproses..', 1000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(3, '8821786', '39267', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(4, '1931561', '87001', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(5, '3305350', '80629', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(6, '3140027', '31941', 'deltonja', 'Telkomsel 5K', '085246104514', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0),
+(7, '9236744', '25879', 'deltonja', 'Telkomsel 5K', '085349680016', 'Sedang diproses..', 5000, 'Pending', '2018-05-30', 'PP', 'WEB', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pesan_tsel`
+--
+
+CREATE TABLE `pesan_tsel` (
+  `id` int(11) NOT NULL,
+  `isi` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `status` enum('UNREAD','READ') NOT NULL,
+  `date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provider`
+--
+
+CREATE TABLE `provider` (
+  `id` int(10) NOT NULL,
+  `code` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `link` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `api_key` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `provider`
+--
+
+INSERT INTO `provider` (`id`, `code`, `link`, `api_key`) VALUES
+(1, 'JOZPEDIA', 'http://pulsa.jozpedia-panel.xyz/api2.php', 'cVAT2jPRh4ecDykRMzRs');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provider_portal`
+--
+
+CREATE TABLE `provider_portal` (
+  `id` int(10) NOT NULL,
+  `code` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `link` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `userid` varchar(300) COLLATE utf8_swedish_ci NOT NULL,
+  `userkey` varchar(300) COLLATE utf8_swedish_ci NOT NULL,
+  `usersecret` varchar(300) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `provider_portal`
+--
+
+INSERT INTO `provider_portal` (`id`, `code`, `link`, `userid`, `userkey`, `usersecret`) VALUES
+(1, 'BORNEO', 'https://borneopedia-smm.com/api/pulsa.php', '#', '#', '#');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `register_key`
+--
+
+CREATE TABLE `register_key` (
+  `id` int(11) NOT NULL,
+  `register_key` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `register_key`
+--
+
+INSERT INTO `register_key` (`id`, `register_key`, `status`) VALUES
+(3, 'W23WWMALO1', 'Active'),
+(4, 'QN9E76LBPX', 'Active'),
+(5, 'YXVTG8X51M', 'Active'),
+(6, '6PXXLGQ6BP', 'Active'),
+(8, 'OQLQTGNHUH', 'Active'),
+(9, '7DH5Z31T8F', 'Active'),
+(10, 'W8TPYCRYGJ', 'Active'),
+(11, 'WZY7Q6LN5L', 'Active'),
+(12, 'RBYVRQ5KLL', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `service` text NOT NULL,
+  `note` text NOT NULL,
+  `min` int(10) NOT NULL,
+  `max` int(10) NOT NULL,
+  `price` double NOT NULL,
+  `status` enum('Active','Not active') NOT NULL,
+  `pid` int(10) NOT NULL,
+  `provider` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `sid`, `category`, `service`, `note`, `min`, `max`, `price`, `status`, `pid`, `provider`) VALUES
+(1, 1, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia IRV Aktip [BONUS++] [INSTAN]', 'REAL INDO , INPUT USERNAME ONLY JANGAN PAKE LINK , PROSES 0-10 JAM', 100, 2000, 44600, 'Active', 1, 'JOZPEDIA'),
+(2, 2, 'Instagram Followers', 'Instagram Followers IRV  1', 'irv 1 new', 100, 5000, 7599, 'Active', 2, 'JOZPEDIA'),
+(3, 3, 'Instagram Followers', 'Instagram Followers IRV 2', '- 0 - 30 mins Start- Speed 5K- No refill - No refund', 300, 15000, 8600, 'Active', 3, 'JOZPEDIA'),
+(4, 4, 'Instagram Followers', 'Instagram Followers IRV 3 [REAL]', 'ÃƒÂ¢Ã…Â¡Ã‚Â¡ÃƒÂ¯Ã‚Â¸Ã‚Â SUPER INSTANT ÃƒÂ¢Ã…Â¡Ã‚Â¡ÃƒÂ¯Ã‚Â¸Ã‚Â Instagram Followers[45K] [REAL] [NO REFUND - NO REFILL]', 200, 10000, 10100, 'Active', 4, 'JOZPEDIA'),
+(5, 5, 'Instagram Followers', 'Instagram Followers IRV 4', 'Username OnlyNo Refill / No Refund0-1 Hour Start!Super Instant DeliveryMinimum 100', 200, 5000, 10700, 'Active', 5, 'JOZPEDIA'),
+(6, 8, 'Instagram Followers', 'Instagram Followers IRV 7 HQ (30Days Refill)', '[MAKS.25K] - [HQ] - [30 Days Refill]', 100, 5000, 18500, 'Active', 8, 'JOZPEDIA'),
+(7, 9, 'Instagram Likes', 'Instagram Likes IRV 1', 'New & INSTANT', 100, 5000, 1350, 'Active', 9, 'JOZPEDIA'),
+(8, 10, 'Instagram Likes', 'Instagram Likes IRV 2 [5K] [INSTANT]', '[5K] [INSTANT]', 25, 5000, 1900, 'Active', 10, 'JOZPEDIA'),
+(9, 11, 'Instagram Likes', 'Instagram Likes IRV 3 ÃƒÂ¢Ã…Â¡Ã‚Â¡ÃƒÂ¯Ã‚Â¸Ã‚Â SUPER INSTANT', 'ÃƒÂ¢Ã…Â¡Ã‚Â¡ÃƒÂ¯Ã‚Â¸Ã‚Â SUPER INSTANT ÃƒÂ¢Ã…Â¡Ã‚Â¡ÃƒÂ¯Ã‚Â¸Ã‚Â Instagram Likes [9K] [INSTANT] [MIN 100]', 100, 9000, 2100, 'Active', 11, 'JOZPEDIA'),
+(10, 12, 'Instagram Views', 'Instagram Views IRV 1 [999K] [REAL - INSTANT]', '[*Link Only], REAL Online, Super FAST', 100, 999000, 799, 'Active', 12, 'JOZPEDIA'),
+(11, 14, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto Likes R1 (MAX 4K)', '4K', 100, 4000, 3400, 'Active', 14, 'JOZPEDIA'),
+(12, 15, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto Likes R2', '20K', 50, 20000, 4100, 'Active', 15, 'JOZPEDIA'),
+(13, 16, 'Instagram Auto Likes/Views/Comments/Impressions', ' Instagram Auto Likes R3 UNLIMETED', '(ALWAYS WORKING - UNLIMITED)', 100, 2147483647, 5100, 'Active', 16, 'JOZPEDIA'),
+(14, 17, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto View', 'USERNAME ONLY (Normal Speed)', 20, 1000000, 2100, 'Active', 17, 'JOZPEDIA'),
+(15, 20, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook EMOTICONS Post Likes [LOVE] ,', 'Facebook EMOTICONS Post Likes [LOVE] [20K - INSTANT]', 50, 100, 9100, 'Active', 20, 'JOZPEDIA'),
+(16, 21, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook EMOTICONS Post Likes [WOW]', 'Facebook EMOTICONS Post Likes [WOW] [20K - INSTANT]', 50, 500, 6400, 'Active', 21, 'JOZPEDIA'),
+(17, 22, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook EMOTICONS Post Likes [ANGRY]', 'Facebook EMOTICONS Post Likes [ANGRY] [20K - INSTANT]', 50, 1000, 6400, 'Active', 22, 'JOZPEDIA'),
+(18, 23, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook EMOTICONS Post Likes [SAD]', 'Facebook EMOTICONS Post Likes [SAD] [20K - INSTANT]', 20, 500, 6400, 'Active', 23, 'JOZPEDIA'),
+(19, 24, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook EMOTICONS Post Likes [HAHA]', 'Facebook EMOTICONS Post Likes [HAHA] [20K - INSTANT]', 50, 500, 6400, 'Active', 24, 'JOZPEDIA'),
+(20, 27, 'Youtube Likes/DisLikes/Shares', ' Youtube Shares', '(INSTANT - 1500 / Day Speed)', 500, 150000, 35100, 'Active', 27, 'JOZPEDIA'),
+(21, 31, 'Instagram Followers', 'Instagram Followers IRV 8 HQ  (30Days Refill)', '[MAKS.50K] - [HQ] - [30 Days Refill]', 100, 7000, 20600, 'Active', 31, 'JOZPEDIA'),
+(22, 36, 'Twitter Followers', 'Twitter Retweets', '[500K] [INSTANT]', 100, 500000, 7100, 'Active', 36, 'JOZPEDIA'),
+(23, 37, 'Twitter Followers', 'Twitter Auto Likes/Favorites', ' [500K] [INSTANT]', 100, 500000, 7500, 'Active', 37, 'JOZPEDIA'),
+(24, 38, 'SoundCloud', 'SoundCloud Followers R1', '[FAST]', 20, 1000000, 34100, 'Active', 38, 'JOZPEDIA'),
+(25, 39, 'SoundCloud', 'SoundCloud Likes R1', '[FAST]', 20, 1000000, 27100, 'Active', 39, 'JOZPEDIA'),
+(26, 40, 'SoundCloud', ' SoundCloud Plays', '(SUPER FAST) (S1) [MULTIPLE OF 100] 	Quantity = MULTIPLE OF 100 ONLY !', 20, 10000000, 1600, 'Active', 40, 'JOZPEDIA'),
+(27, 42, 'Pinterest', 'Pinterest Followers', '(UNLIMITED) [INSTANT]', 20, 1000000000, 42100, 'Active', 42, 'JOZPEDIA'),
+(28, 43, 'Pinterest', 'Pinterest Pin Likes', '(UNLIMITED) [INSTANT]', 200, 1000000, 42100, 'Active', 43, 'JOZPEDIA'),
+(29, 44, 'Pinterest', 'Pinterest RePins', '(UNLIMITED) [INSTANT]', 20, 1000000, 42100, 'Active', 44, 'JOZPEDIA'),
+(30, 47, 'Youtube Likes/DisLikes/Shares', 'Youtube Likes R1 INSTANT', '[ Min 20 - Max 400k ] - INSTANT', 50, 5000, 36100, 'Active', 47, 'JOZPEDIA'),
+(31, 48, 'Instagram Followers', 'Instagram Followers IRV 10 [NON DROP] - [60 DAYS REFILL]', '[20K] - [INSTANT] - [NON DROP] - [60 DAYS REFILL]', 50, 20000, 34600, 'Active', 48, 'JOZPEDIA'),
+(32, 49, 'Instagram Followers', 'Instagram Followers IRV 11 HOT [INSTANT] (NO REFILL NO REFUND)', '(USERNAME ONLY) [10K] (NO REFILL NO REFUND)', 100, 6000, 7100, 'Active', 49, 'JOZPEDIA'),
+(33, 54, 'Instagram Likes', 'Instagram Likes IRV 4 [50K] [REAL - INSTANT] ', '[50K] [REAL - INSTANT] ', 20, 50000, 3100, 'Active', 54, 'JOZPEDIA'),
+(34, 63, 'Instagram Likes', 'Instagram Likes IRVANKEDE 1 [ New & Best Server ]', '[*Link Only], REAL HQ, Super FAST', 100, 15000, 1900, 'Active', 63, 'JOZPEDIA'),
+(35, 64, 'Instagram Likes', 'Instagram Likes IRVANKEDE 2 [ New & Fast Server ]', '[*Link Only], REAL Online, Super FAST', 20, 60000, 2100, 'Active', 64, 'JOZPEDIA'),
+(36, 93, 'Youtube Likes/DisLikes/Shares', 'Youtube Likes R2 [ Min 20 - Max 400k ] - INSTANT', '400K MAX', 20, 40000, 44100, 'Active', 93, 'JOZPEDIA'),
+(37, 94, 'Youtube Likes/DisLikes/Shares', 'Youtube DisLikes SUPER FAST', 'Instant - 5K - SUPER FAST', 50, 5000, 32100, 'Active', 94, 'JOZPEDIA'),
+(38, 95, 'Youtube Likes/DisLikes/Shares', 'Youtube Shares [ New & Best Server ]', '(INSTANT - 1500 / Day Speed)', 1000, 150000, 36100, 'Active', 95, 'JOZPEDIA'),
+(39, 107, 'Telegram', ' Telegram Channel Members', 'MAX 25K', 100, 25000, 105100, 'Active', 107, 'JOZPEDIA'),
+(40, 108, 'Telegram', 'Telegram Post Views', '[ Last 5 post ]', 100, 5000, 105100, 'Active', 108, 'JOZPEDIA'),
+(41, 116, 'Google', 'Google Followers', 'USERNAME OR LINK', 100, 7000, 112100, 'Active', 116, 'JOZPEDIA'),
+(42, 117, 'Google', 'Google Website +1', 'LINK', 50, 5000, 260100, 'Active', 117, 'JOZPEDIA'),
+(43, 118, 'Google', 'Google Post +1', 'LINK', 20, 2000, 125100, 'Active', 118, 'JOZPEDIA'),
+(44, 119, 'Google', 'Google Reshares', 'Google Reshares', 20, 2000, 135100, 'Active', 119, 'JOZPEDIA'),
+(45, 120, 'Instagram Auto Like+View', '80 Auto Likes + Views - 7 Days', ' 	Please Enter Your IG Username Only !', 1, 1, 35000100, 'Active', 120, 'JOZPEDIA'),
+(46, 121, 'Instagram Auto Like+View', ' 	150 Auto Likes + Views - 7 Days', 'USERNAME ', 1, 1, 70000100, 'Active', 121, 'JOZPEDIA'),
+(47, 122, 'Instagram Auto Like+View', '300 Auto Likes + Views - 7 Days', 'USENAME ', 1, 1, 105000100, 'Active', 122, 'JOZPEDIA'),
+(48, 123, 'Instagram Auto Like+View', '600 Auto Likes + Views - 7 Days', 'USERNAME', 1, 1, 175000100, 'Active', 123, 'JOZPEDIA'),
+(49, 124, 'Instagram Auto Like+View', ' 	1500 Auto Likes + Views - 7 Days', 'USERNAME', 1, 1, 314000100, 'Active', 124, 'JOZPEDIA'),
+(50, 125, 'Instagram Auto Like+View', ' 	80 Auto Likes + Views - 30 Days', 'USERNAME', 1, 1, 140000100, 'Active', 125, 'JOZPEDIA'),
+(51, 126, 'Instagram Auto Like+View', '150 Auto Likes + Views - 30 Days', 'USERNAME', 1, 1, 228000100, 'Active', 126, 'JOZPEDIA'),
+(52, 128, 'Instagram Views', 'Instagram Views  [300k Per Day]', '[300k Per Day] - [INSTANT] - [Super FAST]', 100, 999000, 2000, 'Active', 128, 'JOZPEDIA'),
+(53, 163, 'Instagram Auto Like+View', '300 Auto Likes + Views - 30 Days', 'USERNAME', 1, 1, 314000100, 'Active', 163, 'JOZPEDIA'),
+(54, 164, 'Instagram Auto Like+View', '600 Auto Likes + Views - 30 Days', 'USERNAME', 1, 1, 490000100, 'Active', 164, 'JOZPEDIA'),
+(55, 165, 'Instagram Auto Like+View', '1500 Auto Likes + Views - 30 Days', 'USERNAME', 1, 1, 820000100, 'Active', 165, 'JOZPEDIA'),
+(56, 168, 'Instagram Followers', 'Instagram Followers [TURKISH - INSTANT] (NO REFILL NO REFUND)', '	Instagram Followers (USERNAME ONLY) [10K] [TURKISH - INSTANT] (NO REFILL NO REFUND)', 200, 10000, 13600, 'Active', 168, 'JOZPEDIA'),
+(57, 169, 'Instagram Followers', 'Instagram Followers [RUSSIAN - INSTANT]', 'Instagram Followers [35K] [RUSSIAN - INSTANT] [FULL LINK - NO REFILL / REFUND]', 100, 35000, 22100, 'Active', 169, 'JOZPEDIA'),
+(58, 170, 'Instagram Followers', 'Instagram Followers ARAB - IRAN - INSTANT NON DROP', '[20K] [ARAB - IRAN - INSTANT] [NON DROP - 30 DAYS REFILL]', 50, 20000, 35100, 'Active', 170, 'JOZPEDIA'),
+(59, 171, 'Instagram Followers', 'Instagram BRAZIL Followers [30 Days REFILL]', '	Instagram BRAZIL Followers [40K] [REAL - 5K/DAY] [30 Days REFILL]', 25, 40000, 45100, 'Active', 171, 'JOZPEDIA'),
+(60, 172, 'Instagram Comments', '10 Auto Custom Comments - 30 Days', '	Please Enter Your IG Username Only ! \r\nSystem Will Choose Comments Randomly From The List You Provided! \r\nComments with \" @ \" are not accepted! ', 1, 1, 250000100, 'Active', 172, 'JOZPEDIA'),
+(61, 173, 'Instagram Comments', '20 Auto Custom Comments - 30 Days', '	Please Enter Your IG Username Only ! \r\nSystem Will Choose Comments Randomly From The List You Provided! \r\nComments with \" @ \" are not accepted!', 1, 1, 450000100, 'Active', 173, 'JOZPEDIA'),
+(62, 176, 'Instagram Story/Impressions/Saves', 'Instagram Story Views UNLIMITED (USERNAME ONLY) (S1)', 'Instagram Story Views UNLIMITED (USERNAME ONLY) (S1)', 50, 10000000, 14100, 'Active', 176, 'JOZPEDIA'),
+(63, 177, 'Instagram Story/Impressions/Saves', 'Instagram Story Views [20k] (USERNAME ONLY) (S2)', 'Instagram Story Views [20k] (USERNAME ONLY) (S2)', 100, 20000, 20100, 'Active', 177, 'JOZPEDIA'),
+(64, 178, 'Instagram Story/Impressions/Saves', 'Instagram Impressions [20k] [INSTANT] (S1)', 'Instagram Impressions [20k] [INSTANT] (S1)', 500, 20000, 27100, 'Active', 178, 'JOZPEDIA'),
+(65, 179, 'Instagram Story/Impressions/Saves', 'Instagram Saves [UNLIMITED] [20k/Day - INSTANT]', 'Instagram Saves [UNLIMITED] [20k/Day - INSTANT]', 20, 30000, 16100, 'Active', 179, 'JOZPEDIA'),
+(66, 182, 'Instagram Likes', 'Instagram Likes [10K] [ARAB - INSTANT - HQ]', 'Instagram Likes [10K] [ARAB - INSTANT - HQ]', 25, 10000, 4100, 'Active', 182, 'JOZPEDIA'),
+(67, 183, 'Instagram Likes', 'Instagram Likes [70K] [BRAZIL - INSTANT]', 'Instagram Likes [70K] [BRAZIL - INSTANT]', 20, 70000, 5100, 'Active', 183, 'JOZPEDIA'),
+(68, 184, 'Instagram Likes', 'Instagram Likes [35K] [USA - INSTANT]', 'Instagram Likes [35K] [USA - INSTANT]', 20, 35000, 5100, 'Active', 184, 'JOZPEDIA'),
+(69, 185, 'Instagram Likes', 'Instagram Likes [5k] [CHINA - INSTANT]', 'Instagram Likes [5k] [CHINA - INSTANT]', 20, 3000, 5100, 'Active', 185, 'JOZPEDIA'),
+(70, 186, 'Instagram Likes', 'Instagram Likes [35K] [RUSSIA - INSTANT - HQ]', 'Instagram Likes [35K] [RUSSIA - INSTANT - HQ]', 20, 35000, 5100, 'Active', 186, 'JOZPEDIA'),
+(71, 187, 'Instagram Likes', 'Instagram Likes [3k] [JAPAN - HQ - INSTANT]', 'Instagram Likes [3k] [JAPAN - HQ - INSTANT]', 20, 3000, 5100, 'Active', 187, 'JOZPEDIA'),
+(72, 188, 'Instagram Likes', ' Instagram Likes [20K] [IRAN - INSTANT - HQ]', ' Instagram Likes [20K] [IRAN - INSTANT - HQ]', 20, 20000, 6600, 'Active', 188, 'JOZPEDIA'),
+(73, 189, 'Instagram Views', 'Instagram Views R3 [INSTANT - SUPER FAST] ', 'Instagram Views [60k] [INSTANT - SUPER FAST] ', 100, 60000, 1800, 'Active', 189, 'JOZPEDIA'),
+(74, 190, 'Instagram Views', '	Instagram Views [80K] [ARAB - INSTANT]', '	Instagram Views [80K] [ARAB - INSTANT]', 100, 80000, 3100, 'Active', 190, 'JOZPEDIA'),
+(75, 191, 'Instagram Views', '	Instagram Views [55K] [USA - INSTANT]', '	Instagram Views [55K] [USA - INSTANT]', 100, 55000, 4100, 'Active', 191, 'JOZPEDIA'),
+(76, 192, 'Instagram Views', 'Instagram Views [55K] [FRANCE - INSTANT]', 'Instagram Views [55K] [FRANCE - INSTANT]', 100, 55000, 4100, 'Active', 192, 'JOZPEDIA'),
+(77, 193, 'Instagram Views', '	Instagram Views [67K] [IRAN - INSTANT]', '	Instagram Views [67K] [IRAN - INSTANT]', 100, 67000, 4100, 'Active', 193, 'JOZPEDIA'),
+(78, 194, 'Instagram Views', '	Instagram Views [55K] [UK - INSTANT]', '	Instagram Views [55K] [UK - INSTANT]', 100, 55000, 4100, 'Active', 194, 'JOZPEDIA'),
+(79, 195, 'Instagram Views', '	Instagram Views [55K] [JAPAN - INSTANT]', '	Instagram Views [55K] [JAPAN - INSTANT]', 100, 55000, 4100, 'Active', 195, 'JOZPEDIA'),
+(80, 196, 'Instagram Views', 'Instagram Views [65K] [DUBAI - INSTANT]', 'Instagram Views [65K] [DUBAI - INSTANT]', 100, 65000, 4100, 'Active', 196, 'JOZPEDIA'),
+(81, 197, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto Likes (USA - MAX 30K)', '	Instagram Auto Likes (USA - MAX 30K)', 20, 30000, 6100, 'Active', 197, 'JOZPEDIA'),
+(82, 198, 'Instagram Auto Likes/Views/Comments/Impressions', '	Instagram Auto Likes (BRAZIL - MAX 25k)', '	Instagram Auto Likes (BRAZIL - MAX 25k)', 20, 25000, 7100, 'Active', 198, 'JOZPEDIA'),
+(83, 199, 'Instagram Auto Likes/Views/Comments/Impressions', '	Instagram Auto Likes (ARAB - MAX 10K)', '	Instagram Auto Likes (ARAB - MAX 10K)', 100, 10000, 5100, 'Active', 199, 'JOZPEDIA'),
+(84, 200, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto Likes (UK - MAX 30K)', 'Instagram Auto Likes (UK - MAX 30K)', 20, 30000, 7100, 'Active', 200, 'JOZPEDIA'),
+(85, 201, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto Likes (CHINA - MAX 30K)', 'Instagram Auto Likes (CHINA - MAX 30K)', 10, 30000, 7100, 'Active', 201, 'JOZPEDIA'),
+(86, 202, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto Likes + Impressions (30k Max)', 'Instagram Auto Likes + Impressions (30k Max)', 50, 30000, 6100, 'Active', 202, 'JOZPEDIA'),
+(87, 203, 'Instagram Auto Likes/Views/Comments/Impressions', '	Instagram Auto Views (Normal Speed)', '	Instagram Auto Views (Normal Speed)', 20, 1000000, 1600, 'Active', 203, 'JOZPEDIA'),
+(88, 204, 'Instagram Auto Likes/Views/Comments/Impressions', '	Instagram Auto Views (Fast Speed)', '	Instagram Auto Views (Fast Speed)', 100, 60000, 3100, 'Active', 204, 'JOZPEDIA'),
+(89, 207, 'Instagram Auto Likes/Views/Comments/Impressions', '	Instagram Auto Impressions (MAX UNLIMITED)', '	Instagram Auto Impressions (MAX UNLIMITED)', 20, 1000000, 47100, 'Active', 207, 'JOZPEDIA'),
+(90, 233, 'Facebook Page / Website - Likes / Stars', 'Facebook Website Likes [10K] [1-6 Hours Start]', 'Facebook Website Likes [10K] [1-6 Hours Start]', 100, 10000, 45100, 'Active', 233, 'JOZPEDIA'),
+(91, 236, 'Facebook Video Views / Live Stream', 'Facebook Live Stream Views [30 Mins Watch]', 'Facebook Live Stream Views [30 Mins Watch]', 100, 1000, 320100, 'Active', 236, 'JOZPEDIA'),
+(92, 266, 'Twitter Views & Impressions', 'Twitter Views (INSTANT)', 'Twitter Views (INSTANT)', 100, 1000000, 24100, 'Active', 266, 'JOZPEDIA'),
+(93, 267, 'Twitter Views & Impressions', 'Twitter Impressions (INSTANT)', 'Twitter Impressions (INSTANT)', 100, 1000000, 24100, 'Active', 267, 'JOZPEDIA'),
+(94, 268, 'Twitter Poll Votes', 'Twitter Poll Votes (1k to 5k per day) ', 'Twitter Poll Votes (1k to 5k per day) (\"www....com?vote=ButtonNumber\")', 100, 1000000000, 44100, 'Active', 268, 'JOZPEDIA'),
+(95, 269, 'Twitter Poll Votes', ' 	Twitter Poll Votes (100k per day) ', ' 	Twitter Poll Votes (100k per day) (\"www....com?vote=ButtonNumber\")', 100, 1000000, 109100, 'Active', 269, 'JOZPEDIA'),
+(96, 271, 'Website Traffic', 'Website Traffic (12 Hours Start - 10k / Day)', 'No Adfly / Linkshrink / Etc... You Can Use Goo.gl To See The Traffic 12 Hours Start! 10K/Day Minimum 1000', 100, 1000000, 2600, 'Active', 271, 'JOZPEDIA'),
+(97, 272, 'Website Traffic', 'Website Traffic (Instant - 10k / Day)', 'No Adfly / Linkshrink / Etc... You Can Use Goo.gl To See The Traffic 0-1 Hour Start! 100K/Day Minimum 1000', 1000, 1000000, 13100, 'Active', 272, 'JOZPEDIA'),
+(98, 279, 'Instagram Likes', 'Instagram Likes + Impressions [30K] [REAL - INSTANT]', 'Instagram Likes + Impressions [30K] [REAL - INSTANT]', 100, 30000, 4500, 'Active', 279, 'JOZPEDIA'),
+(99, 280, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '80 Auto Likes + Views - 7 Days', '80 Auto Likes + Views - 7 Days', 1, 1, 35000100, 'Active', 280, 'JOZPEDIA'),
+(100, 281, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '150 Auto Likes + Views - 7 Days', '150 Auto Likes + Views - 7 Days', 1, 1, 69500100, 'Active', 281, 'JOZPEDIA'),
+(101, 282, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '300 Auto Likes + Views - 7 Days', 'Please Enter Your IG Username Only !', 1, 1, 103000100, 'Active', 282, 'JOZPEDIA'),
+(102, 283, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '600 Auto Likes + Views - 7 Days', '	Please Enter Your IG Username Only !', 1, 1, 17500100, 'Active', 283, 'JOZPEDIA'),
+(103, 284, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '1500 Auto Likes + Views - 7 Days', 'Please Enter Your IG Username Only !', 1, 1, 308000100, 'Active', 284, 'JOZPEDIA'),
+(104, 285, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '	80 Auto Likes + Views - 30 Days', 'USERNAME ONLY', 1, 1, 128000100, 'Active', 285, 'JOZPEDIA'),
+(105, 286, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '150 Auto Likes + Views - 30 Days', 'USERNAME ONLY', 1, 1, 223000100, 'Active', 286, 'JOZPEDIA'),
+(106, 287, 'Instagram Auto Likes - 7 Days & 30 Days Subscripti', '300 Auto Likes + Views - 30 Days', 'USERNAME ONLY', 1, 1, 308000100, 'Active', 287, 'JOZPEDIA'),
+(107, 301, 'Instagram Followers', 'MURAH HOT FAST INTAGRAM SERVER VIP 2  [10k]', '- 0 - 2h start- No Refill - No refund', 100, 10000, 7600, 'Active', 301, 'JOZPEDIA'),
+(108, 304, 'Instagram Likes', 'Instagram Likes VIP .', '- Instant - Non drop - High Quality - Real', 50, 4000, 800, 'Active', 304, 'JOZPEDIA'),
+(109, 307, 'Instagram Likes', 'Instagram Likes VIP 2', '[ MAX 5K ] - INSTANT', 100, 7000, 900, 'Active', 307, 'JOZPEDIA'),
+(110, 321, 'Instagram Likes', 'Instagram Likes VIP 3 [7K] [REAL]', 'TERMURAH DI INDONESIA-RealSuper Instant Delivery!', 50, 7000, 540, 'Active', 321, 'JOZPEDIA'),
+(111, 345, 'Instagram Followers', 'Instagram Followers [35K] [REFILL30] ', 'Refill (30 Days Maximum)\r\n12-24 Hours Start!\r\n5K/Day\r\nMinimum 100', 100, 35000, 14400, 'Active', 345, 'JOZPEDIA'),
+(112, 346, 'Instagram Views', 'NEW CHEAP Instagram Views [800K] [REAL]', 'NEW CHEAP Instagram Views [800K] [REAL]', 50, 800000, 550, 'Active', 346, 'JOZPEDIA'),
+(113, 348, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [35K] [BRAZIL] S1 ', ' 	Put Link Of Facebook Profile/Page Post\r\n0-10 Minutes Start!\r\nBRAZIL\r\n10K/Day\r\nMinimum 10', 10, 35000, 6190, 'Active', 348, 'JOZPEDIA'),
+(114, 349, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [15K] ÃƒÂ¢Ã…Â¡Ã‚Â¡', 'Put Link Of Facebook Profile/Page Post\r\n0-1 Hour Start!\r\n15K/Day\r\nMinimum 100', 100, 15000, 8650, 'Active', 349, 'JOZPEDIA'),
+(115, 350, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [15K] S2', 'Put Link Of Facebook Profile/Page Post\r\n0-1 Hour Start!\r\n15K/Day\r\nMinimum 100', 100, 15000, 8650, 'Active', 350, 'JOZPEDIA'),
+(116, 352, 'Youtube Views', 'Youtube Views [10M] REFILL 30 DAYS S1  MIN 1K', ' 	Auto Refill Every 24 Hours\r\nRefill (30 Days Maximum)\r\n0 - 6 Hours Start!\r\n1K - 20K/Day\r\n30 - 60 Seconds Retention\r\nMinimum 1000', 1000, 100000000, 13700, 'Active', 352, 'JOZPEDIA'),
+(117, 355, 'Instagram Views', 'Instagram Views [30K] [REAL] CHEAP', 'Real Views!\r\nMin 10\r\nMax 30K\r\nInstant Start !\r\nSpeed 30K / Day !', 10, 30000, 370, 'Active', 355, 'JOZPEDIA'),
+(118, 359, 'Instagram Likes', 'Instagram Likes - [Max 2k] [ TERMURAH in the Market ]', 'termurah', 100, 2000, 197, 'Active', 359, 'JOZPEDIA'),
+(119, 361, 'Instagram Followers', 'Instagram Followers IKP2 MAX 5K - INSTANT 5 MIN START', '( Very Less Drop )', 100, 5000, 10100, 'Active', 361, 'JOZPEDIA'),
+(120, 362, 'Instagram Followers', 'Instagram Followers IKP MAX 7K - 1 MÃƒâ€žÃ‚Â°N START', '(Minimum Drop)', 100, 7000, 13800, 'Active', 362, 'JOZPEDIA'),
+(121, 364, 'Musical.ly', 'Musical.ly Followers [20K]', 'Username Only without \" @ \" ! 5-10k / Day Speed ! Min 20 - Max 20k Instant !', 20, 20000, 190100, 'Active', 364, 'JOZPEDIA'),
+(122, 365, 'Musical.ly', 'Musical.ly HQ Followers [15K]', 'HQ Followers Username Only without \" @ \" ! 5-10k / Day Speed ! Min 20 - Max 15k Instant !', 20, 15000, 250100, 'Active', 365, 'JOZPEDIA'),
+(123, 366, 'Musical.ly', 'Musical.ly Hearts [15K] ÃƒÂ¢Ã…Â¡Ã‚Â¡ÃƒÂ¯Ã‚Â¸Ã‚ÂÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â§', 'Username Only without \" @ \" ! 5-10k / Day Speed ! Min 20 - Max 15k Instant !', 20, 15000, 190100, 'Active', 366, 'JOZPEDIA'),
+(124, 367, 'Musical.ly', 'Musical.ly HQ Hearts [15K]', 'HQ Accounts Username Only without \" @ \" ! 5-10k / Day Speed ! Min 20 - Max 15k Instant !', 20, 150000, 250100, 'Active', 367, 'JOZPEDIA'),
+(125, 368, 'Musical.ly', 'Musical.ly Likes [15K]', 'Input Musical.ly Link ! 5-10k / Day Speed ! Min 20 - Max 15k Instant !', 20, 15000, 190100, 'Active', 368, 'JOZPEDIA'),
+(126, 369, 'Musical.ly', 'Musical.ly HQ Likes [15K]', 'HQ Accounts ! Input Musical.ly Link ! 5-10k / Day Speed ! Min 20 - Max 15k Instant !', 20, 15000, 250100, 'Active', 369, 'JOZPEDIA'),
+(127, 370, 'Twitter Followers', 'Twitter Followers [500K] [HQ] [R30]', 'Refill (30 Days Maximum) Username Only HQ 0-1 Hour Start! 5K - 7K/Day Minimum 100', 100, 500000, 35100, 'Active', 370, 'JOZPEDIA'),
+(128, 371, 'Twitter Followers', 'Twitter Followers [500K] [TURKEY] [R30]', 'Refill (30 Days Maximum) Username Only TURKEY 0-1 Hour Start! 5K - 7K/Day Minimum 100', 100, 500000, 35100, 'Active', 371, 'JOZPEDIA'),
+(129, 372, 'Instagram Followers', 'Instagram Followers IKP 3 - [ Min 200 - Max 60K ]', '1-24 jam', 200, 60000, 10100, 'Active', 372, 'JOZPEDIA'),
+(130, 373, 'Instagram Followers', 'Instagram Followers IKP 4 [Max 7K - 1 MÃƒâ€žÃ‚Â°N START Minimum Drop]', '[Max 7K - 1 MÃƒâ€žÃ‚Â°N START Minimum Drop]', 100, 7000, 17200, 'Active', 373, 'JOZPEDIA'),
+(131, 374, 'Instagram Followers', 'Ãƒâ€žÃ‚Â°nstagram Followers IKP 5 - ( Max 25k - UltraFast ) ( Working Less Drop )', '( Max 25k - UltraFast ) ( Working Less Drop )', 100, 25000, 17200, 'Active', 374, 'JOZPEDIA'),
+(132, 375, 'Instagram Followers', 'Ãƒâ€žÃ‚Â°nstagram Followers IKP 6 [ 30 Days Refill ] [ 10k/day ] [ Max - 55k ] INSTANT', '10K PERHARI MAX 55K INSTANT', 100, 10000, 21800, 'Active', 375, 'JOZPEDIA'),
+(133, 376, 'Instagram Followers', 'Ãƒâ€žÃ‚Â°nstagram Followers IKP 7 (Fast) (15 Days Refill ) | (MIN 1000 - Max - 10k)', '(Fast) (15 Days Refill ) | (MIN 300 - Max - 10k)', 1000, 10000, 22600, 'Active', 376, 'JOZPEDIA'),
+(134, 377, 'Instagram Followers', 'Ãƒâ€žÃ‚Â°nstagram Followers IKP 8 Real & Active (Fast) (Max - 25k) (30 days refill)', 'Real & Active (Fast) (Max - 25k) (30 days refill)', 100, 25000, 26100, 'Active', 377, 'JOZPEDIA'),
+(135, 378, 'Instagram Followers', 'Ãƒâ€žÃ‚Â°nstagram Followers IKP 9 MINIMAL ORDER 1000  NONDROP FAST', 'Real Refill (30 Days Maximum) 0-1 start Followers', 1000, 10000, 22600, 'Active', 378, 'JOZPEDIA'),
+(136, 379, 'Instagram Followers', 'Instagram Followers IKP 10 MAX 1,5K||5 MENIT START', 'Waktu Mulai 5 menit sampai 6 jam Drop Followers  tidak terlalu banyak kita Privat DB', 100, 1500, 8650, 'Active', 379, 'JOZPEDIA'),
+(137, 383, 'Youtube Subscribers', 'Youtube Subscribers - MAX 1K TERMURAH', '- 0 - 12h Mulai - Kecepatan 500 - 1k Untuk saat ini - Non Drop - Lifetime Guaranteed', 50, 1000, 290100, 'Active', 383, 'JOZPEDIA'),
+(138, 387, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia IKP 1 FAST', '1X24 JAM REAL indonesia PERSUBMIT 2K jangan lebih setelah 2k submit lagi', 100, 5000, 48300, 'Active', 387, 'JOZPEDIA'),
+(139, 388, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Semarang', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 100, 1000, 35100, 'Active', 388, 'JOZPEDIA'),
+(140, 389, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Magelang', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 35100, 'Active', 389, 'JOZPEDIA'),
+(141, 390, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Sukabumi', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 35100, 'Active', 390, 'JOZPEDIA'),
+(142, 391, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Bandung', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 2000, 42100, 'Active', 391, 'JOZPEDIA'),
+(143, 392, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Bekasi', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 37100, 'Active', 392, 'JOZPEDIA'),
+(144, 393, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Bali', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 49100, 'Active', 393, 'JOZPEDIA'),
+(145, 394, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Jakarta', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 2000, 43100, 'Active', 394, 'JOZPEDIA'),
+(146, 395, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Cirebon', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 37100, 'Active', 395, 'JOZPEDIA'),
+(147, 396, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Lampung', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 39100, 'Active', 396, 'JOZPEDIA'),
+(148, 397, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Palembang', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 100, 1000, 40100, 'Active', 397, 'JOZPEDIA'),
+(149, 398, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Aceh', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 40100, 'Active', 398, 'JOZPEDIA'),
+(150, 399, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Surabaya', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 39100, 'Active', 399, 'JOZPEDIA'),
+(151, 400, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Bogor', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 40100, 'Active', 400, 'JOZPEDIA'),
+(152, 401, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Cimahi', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 999, 39100, 'Active', 401, 'JOZPEDIA'),
+(153, 402, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Tangerang', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 100, 1000, 40100, 'Active', 402, 'JOZPEDIA'),
+(154, 403, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Purbalingga', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 100, 1000, 38100, 'Active', 403, 'JOZPEDIA'),
+(155, 404, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Sulawesi', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 50, 1000, 40100, 'Active', 404, 'JOZPEDIA'),
+(156, 405, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Kalimantan', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 100, 1000, 39100, 'Active', 405, 'JOZPEDIA'),
+(157, 406, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Makasar', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 100, 1000, 41100, 'Active', 406, 'JOZPEDIA'),
+(158, 407, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Aktip Solo', '50% target 50% random ,20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM', 150, 1000, 37100, 'Active', 407, 'JOZPEDIA'),
+(159, 410, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia AKTIP SPECIAL MAX 15K FOLLOWERS INDONESIA', '20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM,PERSUBMIT 2K FOLLOWERS', 50, 5000, 49100, 'Active', 410, 'JOZPEDIA'),
+(160, 411, 'Instagram Followers', 'Instagram Followers IKP 11 FASTSERVICE', 'FAST ERVICE', 500, 50000, 13600, 'Active', 411, 'JOZPEDIA'),
+(161, 412, 'Instagram Followers', 'Instagram Followers IKP 12  ( Min 200 | MAX 5K ) ( 0-6 hours start )', '( Min 200 | MAX 5K ) ( 0-6 hours start )', 200, 50000, 9800, 'Active', 412, 'JOZPEDIA'),
+(162, 413, 'Instagram Followers', 'Instagram Followers IKP 13  ( 0-6 hours Start ) Min 500 -MAX 5K', '( 0-6 hours Start ) Min 500 -MAX 5K', 500, 5000, 9000, 'Active', 413, 'JOZPEDIA'),
+(163, 414, 'Instagram Followers', 'Instagram Followers IKP 14 5 Mint Delivery Max 2K - No refill, No refund', '5 Mint Delivery Max 2K - No refill, No refund', 200, 2000, 14100, 'Active', 414, 'JOZPEDIA'),
+(164, 416, 'Instagram Followers', 'Instagram Followers VIP 2  MAX 10K NONDROP', 'Real Refill (30 Days Maximum) 0-12 Hours Start! Minimum 100', 100, 10000, 22600, 'Active', 416, 'JOZPEDIA'),
+(165, 417, 'Instagram Comments', 'Instagram Comments [50K] [RANDOM]', 'No Refill / No Refund Random Comments 0-1 Hour Start! Fast Delivery Minimum 25', 25, 50000, 38100, 'Active', 417, 'JOZPEDIA'),
+(166, 418, 'Instagram Comments', 'Instagram Comments [800] [EMOJI RANDOM', 'No Refill / No Refund Random Comments With Emoji (Faces, Hearts, Etc...) 0-12 Hours Start! Fast Delivery Minimum 5', 5, 800, 90100, 'Active', 418, 'JOZPEDIA'),
+(167, 421, 'Youtube Views', 'Youtube Views S4 [1M] [REFILL 60DAYS]', 'Refill (60 Days Maximum) 0 - 3 Hours Start! 5K - 100K/Day 60 - 90 Seconds Retention Minimum 1000', 1000, 100000000, 8900, 'Active', 421, 'JOZPEDIA'),
+(168, 422, 'Youtube Views', 'Youtube Views S5  [500K] [AUTO REFILL 10]', '10 Days Refill Guaranteed Max 500,000 Per Order ! 0-1 Hour Start! 200K - 300K/Day Random Retention Minimum 2000', 2000, 500000, 13100, 'Active', 422, 'JOZPEDIA'),
+(169, 423, 'Youtube Views', 'Youtube Views S6 [10M] [AUTO REFILL30]', 'Auto Refill Every 24 Hours Refill (30 Days Maximum) 0 - 6 Hours Start! 1K - 20K/Day 30 - 60 Seconds Retention Minimum 1000', 1000, 10000000, 15700, 'Active', 423, 'JOZPEDIA'),
+(170, 424, 'Youtube Views', 'Youtube Views S7 [5M] [REFILL 30]', 'Auto Refill Every 24 Hours Refill (30 Days Maximum) 0 - 6 Hours Start! 5K - 50K/Day 30 - 60 Seconds Retention Minimum 5000', 5000, 50000000, 18600, 'Active', 424, 'JOZPEDIA'),
+(171, 425, 'Youtube Subscribers', 'YouTube Channel Subscribers [ Guaranteed ]', '[ Max 1k, Start 0 - 12 Hours, Speed 1k, Non Drop & HQ ]', 50, 1000, 300100, 'Active', 425, 'JOZPEDIA'),
+(172, 426, 'Youtube Subscribers', 'Youtube Subscribers S2 [ Real | 250-500/day | 10-40% Drop | Max 30k ] ( NO Refill ) TIDAK ADA GARANSI', '[ Real | 250-500/day | 10-40% Drop | Max 30k ] ( NO Refill )', 500, 30000, 105100, 'Active', 426, 'JOZPEDIA'),
+(173, 427, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia  Laki-Laki AKTIP', 'AKURASI MENCAPAI 90% - PROSES 1X24JAM !!!', 100, 3000, 48300, 'Active', 427, 'JOZPEDIA'),
+(174, 428, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Perempuan/Wanita AKTIP', 'AKURASI MENCAPAI 90% - PROSES 1X24JAM !!!', 100, 1500, 48300, 'Active', 428, 'JOZPEDIA'),
+(175, 429, 'Instagram Likes', 'Instagram Likes INDONESIA INSTAN S1 (Hitungan Detik) [MAX3K]', 'Persubmit 1K input link - Hitungan Detik - Jika Status Duluan Sukses Like Akan Trus Berjalan Sesuai Orderan', 100, 1000, 4100, 'Active', 429, 'JOZPEDIA'),
+(176, 431, 'Instagram Likes', 'Instagram Likes INDONESIA INSTAN S2 [MAX10K] [BONUSS++++]  (Hitungan Detik)', 'Sekali Inpur 1000Like - DB UP 10K LIKE - Input link - Hitungan Detik - Jika Status Duluan Sukses Like Akan Trus Berjalan Sesuai Orderan', 50, 1000, 7100, 'Active', 431, 'JOZPEDIA'),
+(177, 434, 'Instagram Likes', 'Instagram Likes - (MAX 2500) termurah', 'SANGAT MURAH', 100, 1000, 200, 'Active', 434, 'JOZPEDIA'),
+(178, 436, 'Instagram Views', 'Instagram Views [600K] CHEAP TERMURAH', 'SUPER INSTANT DELIVERY !!', 20, 600000, 200, 'Active', 436, 'JOZPEDIA'),
+(179, 438, 'Instagram Followers', 'Instagram Followers VIP 4 MAX 4k', 'no refund no refill', 200, 4000, 7100, 'Active', 438, 'JOZPEDIA'),
+(180, 444, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Dani Aktip FAST [MAX 2K CHEAP IN THE MARKET]', '20% Masuk Hitungan Detik Sisa Folowers masuk paling lama 1X24 JAM, PER USERNAME MAX 2K FOLLOWERS INDONESIA', 100, 2000, 35100, 'Active', 444, 'JOZPEDIA'),
+(181, 445, 'Instagram Followers', 'Instagram Followers VVIIPP 1 - [ Min 100 - Max 6K ]', '- SUPER FAST DELIVERY ( 5 - 10 Mins ) - Min 100 - Max 10K - NO REFILL - NO REFUND', 100, 5000, 8100, 'Active', 445, 'JOZPEDIA'),
+(182, 446, 'Instagram Likes', 'Instagram Like Sangat Murah [MAX2K] ( Cheapest in the Market )', '( Cheapest in the Market )', 100, 2000, 197, 'Active', 446, 'JOZPEDIA'),
+(183, 447, 'Instagram Likes', 'Instagram Like Sangat Murah  S2 [MAX2,5K] ( Cheapest in the Market )', '(Cheapest In market )', 100, 2500, 197, 'Active', 447, 'JOZPEDIA'),
+(184, 448, 'Instagram Views', 'Instagram Views Cheapest In Market Murahnya Gila [MAX10K]', '( Cheapest in the Market )', 50, 10000, 197, 'Active', 448, 'JOZPEDIA'),
+(185, 449, 'Instagram Views', 'Instagram Views Cheapest In Market Murahnya Gila  S2 [MAX1M]', '( Cheapest in the Market )', 50, 100000000, 197, 'Active', 449, 'JOZPEDIA'),
+(186, 450, 'Instagram Likes', 'Instagram Like Sangat Murah S3 [MIN 20 MAX3K] ( Cheapest in the Market ) HANYA DI IRVANKEDE', 'Instagram Like Sangat Murah S2 [MAX2,5K] ( Cheapest in the Market )', 20, 3000, 196, 'Active', 450, 'JOZPEDIA'),
+(187, 453, 'Facebook Followers / Friends', 'Facebook Followers (Instant) |[Max : 100k] ( 30 days Refill )', 'Facebook Followers (Instant) |[Max : 100k] ( 30 days Refill )', 50, 1000000, 41100, 'Active', 453, 'JOZPEDIA'),
+(188, 454, 'Twitter Auto Retweets / Favorites / Views', 'Twitter Auto Likes/Favorites IKP', 'Twitter Auto Likes/Favorites', 10, 500000, 7100, 'Active', 454, 'JOZPEDIA'),
+(189, 455, 'Twitter Auto Retweets / Favorites / Views', 'Twitter Auto Retweets ( MIN 10 - Max 500k )', 'Twitter Auto Retweets ( MIN 10 - Max 500k )', 10, 500000, 7100, 'Active', 455, 'JOZPEDIA'),
+(190, 456, 'Youtube Views', 'Youtube Views - [ No Refill No Refund - 10M ] [ Speed 10K - 100K ]', '- Instant Start ( 0 - 6h ) - Speed 10K - 50K Per days - Retention : 20 - 100 sec - Please disable ALLLOWED/BLOCKED country and age restriction ! - NO REFILL - NO REFUND', 1000, 1000000000, 5100, 'Active', 456, 'JOZPEDIA'),
+(191, 457, 'Youtube Views', 'Youtube Views - [ No Refill No Refund- 1M ] [ Speed 50K+/D ] [60 MIN RETENTION ]', '- INSTANT START - UP TO 60 Mins Retention - Min 1K - Max 1M - NO REFILL - NO REFUND - Speed 50K+/Day', 1000, 50000000, 5100, 'Active', 457, 'JOZPEDIA'),
+(192, 458, 'Youtube Views', 'Youtube Views - [Lifetime Guaranteed - 10M ] [ Speed 10K - 100K/D ] BACA CATATAN SEBELUM ORDER', '- INSTANT - Retention 1 - 3 mins - Lifetime Guaranteed - AUTOMATIC REFILL EVERY - 12 - 36 HRS - CURRENT SPEED -10k-50k/day --- SPEED can change anytime. ( If drop order will be take maximum 10 days to complete refill)', 1000, 10000000, 5100, 'Active', 458, 'JOZPEDIA'),
+(193, 459, 'Instagram Followers', 'Instagram Followers Privat S2 instant Work Norefund No refill CUMA DI IRVANKEDE', 'Instagram Followers Privat S1 instant Work Norefund No refill CUMA DI IRVANKEDE', 200, 4500, 9190, 'Active', 459, 'JOZPEDIA'),
+(194, 460, 'Instagram Followers', 'Instagram Followers Privat S3 instant Work Norefund No refill CUMA DI IRVANKEDE', 'Instagram Followers Privat S1 instant Work Norefund No refill CUMA DI IRVANKEDE', 100, 4500, 6700, 'Active', 460, 'JOZPEDIA'),
+(195, 461, 'Instagram Followers', 'Instagram Followers VVIIPP 2 [6K]', 'Cheapest In Market', 100, 6000, 5000, 'Active', 461, 'JOZPEDIA'),
+(196, 462, 'Instagram Followers', 'Instagram Followers VVIIPP 3 [3K]', 'Complete In 6-12 Hour, Partial / Cancel issues', 100, 3000, 5200, 'Active', 462, 'JOZPEDIA'),
+(197, 464, 'Instagram Followers', 'Instagram Followers VVIIPP 5 [5K] [NO REFILL NO REFUND] [1MENIT START]', 'MAX 5K NO REFILL NO REFUND', 200, 5000, 6900, 'Active', 464, 'JOZPEDIA'),
+(198, 467, 'Facebook Page / Website - Likes / Stars', 'Facebook Page Likes S3 ( Min 50 : Max 300k ) ( Recommended Service )', 'Facebook Page Likes ( Min 50 : Max 300k ) ( Recommended Service )', 50, 300000, 25100, 'Active', 467, 'JOZPEDIA'),
+(199, 468, 'Facebook Page / Website - Likes / Stars', 'Facebook Page Likes S5 [HQ] [Non Drop, 60 Days Auto Refill, Super Fast]', 'Facebook Page Likes [HQ] [Non Drop, 60 Days Auto Refill, Super Fast] - INSTANT', 100, 1000000, 45100, 'Active', 468, 'JOZPEDIA'),
+(200, 469, 'Instagram Followers', 'Instagram Followers VVIIPP 6 - [ Min 100 - Max 5K ] - SUPER FAST', '[ Min 100 - Max 5K ] - SUPER FAST', 100, 5000, 7700, 'Active', 469, 'JOZPEDIA'),
+(201, 470, 'Instagram Likes', 'Instagram Likes INDONESIA INSTAN S3 (Hitungan Detik) MAX 1K', '(Hitungan Detik) , PER FOTO MAX HANYA 1K', 500, 1000, 2100, 'Active', 470, 'JOZPEDIA'),
+(202, 475, 'Instagram Followers', 'Instagram Followers VVIIPP 7 INSTAN [10K]', 'FAST DELIVERY NO REFILL NO REFUND', 100, 6000, 6200, 'Active', 475, 'JOZPEDIA'),
+(203, 481, 'Instagram Followers', 'Instagram Followers VVIIPP 9 30 DAYS REFILL SUPER FAST [10K]', '- Instant - Speed 5k/Day - 30 days refill', 100, 10000, 15100, 'Active', 481, 'JOZPEDIA'),
+(204, 483, 'Twitter Followers', 'Twitter Followers Min 100 - Max 2K - No refill', 'MAX 2K NO REFILL NO REFUNND', 100, 2000, 16600, 'Active', 483, 'JOZPEDIA'),
+(205, 484, 'Twitter Followers', 'Twitter Followers [25K] [HQ] [AUTO REFILL30 DAYS]', 'Username Only Refill (30 Days Maximum) High Quality 0-1 Hour Start! 5K - 25K/Day Minimum 100', 100, 25000, 23300, 'Active', 484, 'JOZPEDIA'),
+(206, 485, 'Twitter Followers', 'Twitter Followers [20K] [HQ] [REFILL30DAYS]', 'Twitter Followers [20K] [HQ]', 100, 20000, 33100, 'Active', 485, 'JOZPEDIA'),
+(207, 486, 'Instagram Followers', 'Instagram Followers VVIIPP 10 NON DROP SUPER FAST [10K]', '30 DAYS REFUNDD FAST', 100, 10000, 21700, 'Active', 486, 'JOZPEDIA'),
+(208, 487, 'Instagram Followers', 'Instagram Followers Khusus IRVANKEDE S2 NO REFILL NO REFUND [2,5K] CHEAP', 'Norefund No refill start 1 jam Harga Berbanding Lurus Dengan Kualitas', 100, 2500, 4100, 'Active', 487, 'JOZPEDIA'),
+(209, 490, 'Instagram Followers', 'Instagram Followers VVIIPP 11 Max 20K - SUPER FAST', '10-30 MENIT START NO REFILL NO REFUND', 200, 10000, 9600, 'Active', 490, 'JOZPEDIA'),
+(210, 491, 'Instagram Followers', 'Instagram Followers VVIIPP 12 Max 20K - [ Super FAST 6 JAM START] - No Partial', '[ Super FAST ] - No Partial no refund no refill -  	- No Refill / No Refund - 6 Hour Start - Superfast Speed - Minimum 100', 200, 10000, 9600, 'Active', 491, 'JOZPEDIA'),
+(211, 492, 'Instagram Followers', 'Instagram Followers VVIIPP 13 [NoRefund No Refill - Max 5k ] [ 0 - 1Hrs Complete ]', '[NO REFUND NO REFILL- Max 5k ] [ 0 - 1Hrs Complete ]', 300, 5000, 11100, 'Active', 492, 'JOZPEDIA'),
+(212, 508, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook - Post Likes Real S1 ( Instant, Real, Superfast, Fanpage & Profile post, Max 5k )', '- 100% Real users - Min = 25 likes - max = 50k likes - Instant start - Mixed likes - Accept All Post - Life time Guarantee of likes', 25, 1000, 5100, 'Active', 508, 'JOZPEDIA'),
+(213, 509, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook - Post Likes S2 ( Instant, Real, Ultra fast, Fanpage & Profile post, Max 3k )', '- 100% Real users - Min = 25 likes - max = 50k likes - Instant start - Mixed likes - Accept All Post - Life time Guarantee of likes', 100, 5000, 6000, 'Active', 509, 'JOZPEDIA'),
+(214, 514, 'Youtube Views', 'Youtube - Views IK 1 [ 30k-50k/day ] [ No Refill Guarantee ]', '[ 30k-50k/day ] [ No Refill Guarantee ]', 1000, 10000, 3600, 'Active', 514, 'JOZPEDIA'),
+(215, 515, 'Youtube Views', 'Youtube - Views IK 2  [ 20k-100k/day ] [ Life Time Guarantee ] INSTANT', 'Best Quality | Auto Refill', 1000, 1000000, 5400, 'Active', 515, 'JOZPEDIA'),
+(216, 516, 'Youtube Views', 'Youtube - Views IK 3 [ 20k-100k/day ] [ No Refill Guarantee ] INSTANT', '[ 20k-100k/day ] [ No Refill Guarantee ] INSTANT', 1000, 1000000, 7100, 'Active', 516, 'JOZPEDIA'),
+(217, 517, 'Youtube Views', 'Youtube Views IK 4 ( Min 1000 | Max 500k ) [ Speed - 5k-50k/day ] [ Life Time Guaranteed ] INSTANT', 'Youtube Views ( Min 1000 | Max 500k ) [ Speed - 5k-50k/day ] [ Life Time Guaranteed ] INSTANT', 1000, 500000, 9100, 'Active', 517, 'JOZPEDIA'),
+(218, 518, 'Youtube Views', 'Youtube - Views IK 5 [ Speed - 5-50k/day ] [ 30 Days Refill ] INSTANT - 1 hrs', '[ Speed - 5-50k/day ] [ 30 Days Refill ] INSTANT - 1 hrs', 1000, 1000000, 13100, 'Active', 518, 'JOZPEDIA'),
+(219, 519, 'Youtube Likes/DisLikes/Shares', 'Youtube Likes IK 1 5k ( Min 50 )', 'Youtube Likes 5k ( Min 50 )', 50, 10000, 30100, 'Active', 519, 'JOZPEDIA'),
+(220, 520, 'Instagram Followers', 'Instagram Khusus Irvankede S4 SUPER FAST [10K] [MIN 300]', 'NO REFILL NO REFUND', 300, 10000, 5200, 'Active', 520, 'JOZPEDIA'),
+(221, 521, 'Youtube Subscribers', 'Youtube Subscribers 500K SEUMUR HIDUP', 'Min 25 / Max 500k Max 10k Per Order - Once completed you can Order Again ! Real 0-12 Hours Start Lifetime Guaranteed Always Working', 25, 5000000, 475100, 'Active', 521, 'JOZPEDIA'),
+(222, 523, 'Instagram Followers', 'Instagram Khusus Irvankede S6  MAX 4K FASTSERVICE', 'START 0-2 JAM NO REFILL NO REFUND', 100, 4000, 4400, 'Active', 523, 'JOZPEDIA'),
+(223, 526, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Impressions [1M]', 'Real Instant Delivery! Minimum 100', 100, 1000000, 2200, 'Active', 526, 'JOZPEDIA'),
+(224, 527, 'Instagram Story Views ', 'Instagram Story Views [30K]', 'No Refill / No Refund 0-1 Hour Start! 10K/Day Minimum 50', 100, 30000, 13600, 'Active', 527, 'JOZPEDIA'),
+(225, 528, 'Facebook Video Views / Live Stream', 'Facebook Video Views [10M]', 'Real Instant Start! 10K - 50K/Day Minimum 1000', 1000, 10000000, 5300, 'Active', 528, 'JOZPEDIA'),
+(226, 529, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [1K] [EMOTICONS] [LOVE]', 'Min = 10 Max = 1k! Instant Start !', 10, 1000, 8600, 'Active', 529, 'JOZPEDIA'),
+(227, 530, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [1K] [EMOTICONS] [HAHA]', 'INSTANT', 10, 1000, 8600, 'Active', 530, 'JOZPEDIA'),
+(228, 531, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [1K] [EMOTICONS] [WOW]', 'INSTANT', 10, 1000, 8600, 'Active', 531, 'JOZPEDIA'),
+(229, 532, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [1K] [EMOTICONS] [SAD]', 'INSTANT', 10, 1000, 8600, 'Active', 532, 'JOZPEDIA'),
+(230, 533, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes [1K] [EMOTICONS] [ANGRY]', 'INSTANT', 8500, 100, 8600, 'Active', 533, 'JOZPEDIA'),
+(231, 536, 'Instagram Views', 'Instagram - Views Termurah Di Indonesia Instant Super Fast', 'INSTANT', 100, 1000, 105, 'Active', 536, 'JOZPEDIA'),
+(232, 537, 'Instagram Followers', 'Instagram Followers Murah FAST', 'Fast Start Min 100 MAX 1k No refill No refund Low Quality - Drops 10-30% as of now', 100, 1000, 2600, 'Active', 537, 'JOZPEDIA'),
+(233, 541, 'Instagram Followers', 'Instagram Followers Media 5 SUPER FAST 5-10 MENIT 10K', 'NO REFILL NO REFUND', 100, 10000, 9500, 'Active', 541, 'JOZPEDIA'),
+(234, 542, 'Instagram Followers', 'Instagram Followers Media 6 SUPER FAST NO PARTIAL', 'SUPER FAST NO REFILL NO REFUND', 100, 10000, 9600, 'Active', 542, 'JOZPEDIA'),
+(235, 544, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia Real Aktip Murah S1', 'CHEAP START 5 JAM - 24 JAM - 48 JAM - HARGA BERBANDING LURUS DENGAN KECEPATN DAN KUALITAS - MAX PERAKUN/PERUSERNAME CUMA 1K UNTUK LAYANAN INI - TERMURAH DI INDONESIA', 50, 1000, 28100, 'Active', 544, 'JOZPEDIA'),
+(236, 545, 'Instagram Followers', 'Instagram Followers Refill 1  [8k] [30 Days Refill]', '2K /HARI FOLL MASUK 2K PERHARINYA JADI JANGAN SUBMIT LANGSUNG MAX YA', 100, 8000, 10100, 'Active', 545, 'JOZPEDIA'),
+(237, 546, 'Instagram Followers', 'Instagram Followers Refill 2 [4k] [30 Days Refill]', '1,5-2K/ DAYS', 100, 4000, 15300, 'Active', 546, 'JOZPEDIA'),
+(238, 548, 'Youtube Views', 'Youtube Views Kede - [ 10M ] [ Speed 50K - 200K ]', '- Instant Start - Speed 50k -200k - Non drop until now - 30 days refill', 1000, 10000000, 5300, 'Active', 548, 'JOZPEDIA'),
+(239, 549, 'Youtube Views', 'Youtube Views Kede 2- [ NoRefill Norefund- 1M ] [ Speed 20K+/D ] [ÃƒÂ¢Ã¢â‚¬Â°Ã‹â€  60 MIN RETENTION ]', '- INSTANT START - UP TO 60 Mins Retention - Min 1K - Max 1M - NO REFILL - NO REFUND - Speed 50K+/Day', 1000, 50000000, 6100, 'Active', 549, 'JOZPEDIA'),
+(240, 550, 'Youtube Views', 'Youtube Views Kede 3 - [ NON DROP ] [ HR ] [ Speed 30K - 70K+/D ]', '- SUPER FAST START - Wacth Times : Up to 30 mins - 70% - 100% Retentions - Speed 70K - 150K - Non Drop - Lifetime Guarantee - NOTE: us always bonus and if have drop , just drop views of bonus .', 500, 10000000, 14100, 'Active', 550, 'JOZPEDIA'),
+(241, 551, 'Youtube Subscribers', 'Youtube - Subscribers [ REFILL30DAYS- 5% Drop ] [ Min 50 - Max 1.5K ] [ Speed 500+/D ]', '- 6 -12h Start - 30 days refill if any drop - Min 50 - Max 1000 - Very less drop', 50, 1500, 205100, 'Active', 551, 'JOZPEDIA'),
+(242, 552, 'Youtube Subscribers', 'Youtube - Subscribers [ RFILL 30DAYS ] [ Min 50 - Max 1.5K ] [ Bonus Subs ]', '- 12 - 30h Start - Speed 500 - 1k For now - 60 days refill', 50, 1500, 290100, 'Active', 552, 'JOZPEDIA'),
+(243, 553, 'Facebook Followers / Friends', 'Facebook Followers (0-6) |[Max : 5k] ( 30 days Refill )', 'Starts in 0-6 H 30 Days refill Guarantee', 500, 5000, 21700, 'Active', 553, 'JOZPEDIA'),
+(244, 555, 'Instagram Story/Impressions/Saves', 'Instagram last Story - 1 Mint Delivery - Only Username - No refund', 'Instagram last Story - 1 Mint Delivery - Only Username - No refund', 400, 10000, 4700, 'Active', 555, 'JOZPEDIA'),
+(245, 556, 'Instagram Views', 'Instagram Views Cheap [300K]', 'Minimum 50 Start time from 0 to 6 hours 300K/Day', 100, 300000, 180, 'Active', 556, 'JOZPEDIA'),
+(246, 557, 'Instagram Followers', 'Instagram Followers Refill 30 Days [10K] FULL LINK 1-2 DAYS START', 'INPUT FULL LINK REQUIRED ! Min = 200 Max = 10k 0 to 6 Hours Start 1k - 2k / Day Speed ! 30 Days Refill ! -- 1 HARI MASUNYA 1K FOLLOWERS JADI KALO DELAY SAMPE 4 -5 HARI ITU KARNA ORDERANNYA BANYAK', 200, 10000, 7600, 'Active', 557, 'JOZPEDIA'),
+(247, 560, 'Instagram Followers', 'Instagram Followers [10K] [INSTANT DELIVERY', 'No Refill / No Refund 0-1 Hour Start! Super Instant Delivery Minimum 100 Maximum = 10k Daily !', 100, 10000, 7300, 'Active', 560, 'JOZPEDIA'),
+(248, 561, 'Instagram Followers', 'Instagram Followers [4K] [NO REFUND NO REFILL]', '0-1 JAM START NO REFUND NO REFILL', 100, 4000, 4100, 'Active', 561, 'JOZPEDIA'),
+(249, 562, 'Instagram Followers', 'Instagram Followers [1.5K] [START 1AM] [NOREFILL NO REFUND]', 'Instagram Followers [1.5K] [START 1AM] [NOREFILL NO REFUND]', 100, 1500, 3800, 'Active', 562, 'JOZPEDIA'),
+(250, 563, 'Instagram Followers', 'Instagram Followers [7,5K] [SUPER FAST,INSTANT,NO REFILL NO REFUND]', 'NO REFILL NO REFUND', 100, 7500, 9100, 'Active', 563, 'JOZPEDIA'),
+(251, 564, 'Youtube Views', 'Youtube Views Auto Refill [1M]', '0--12 JAM START OTOMATIS REFILL JIKA 48 JAM VIEW DROP', 1000, 1000000, 3900, 'Active', 564, 'JOZPEDIA'),
+(252, 565, 'Youtube Subscribers', 'Youtube Subscriber ( Start 12-36 Hours) 200/500 Day Cheap', 'Youtube Subscriber ( Start 12-36 Hours) 200/500 Day', 100, 30000, 24100, 'Active', 565, 'JOZPEDIA'),
+(253, 566, 'Instagram Followers', 'Instagram Followers IK 10K [0-1H start]', '10K [0-1H start]', 100, 10000, 5100, 'Active', 566, 'JOZPEDIA'),
+(254, 567, 'Instagram Followers', 'Instagram Followers IK 2 [MIN 200&MAX10K]', 'NO REFILL NO REFUND', 200, 10000, 6700, 'Active', 567, 'JOZPEDIA'),
+(255, 569, 'Facebook Page / Website - Likes / Stars', 'Facebook Page Likes S4 ( Min 50 : Max 300k ) ( Recommended Service )', '( Min 50 : Max 300k ) ( Recommended Service )', 50, 3000000, 23600, 'Active', 569, 'JOZPEDIA'),
+(256, 570, 'Instagram Followers', 'Instagram Followers [2K] LQ  S1- Instant Start', 'LOW QUALITY START 2 JAM', 100, 2000, 3500, 'Active', 570, 'JOZPEDIA'),
+(257, 571, 'Instagram Followers', 'Instagram LQ S2 [5K] [START 0-6h] LOW QUALITTTTT', 'DROP CEPET LOW QUALITY START 0-6 JAM', 100, 5000, 3150, 'Active', 571, 'JOZPEDIA');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_dm`
+--
+
+CREATE TABLE `services_dm` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `type` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `service` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` double NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL,
+  `pid` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `provider` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_line`
+--
+
+CREATE TABLE `services_line` (
+  `id` int(10) NOT NULL,
+  `category` int(10) NOT NULL,
+  `service` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_pulsa`
+--
+
+CREATE TABLE `services_pulsa` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `service` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL,
+  `pid` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `provider` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `services_pulsa`
+--
+
+INSERT INTO `services_pulsa` (`id`, `sid`, `category`, `type`, `service`, `price`, `status`, `pid`, `provider`) VALUES
+(1, 1, '1', 'Pulsa', 'Tri 1K', 1000, 'Active', '3', 'PP'),
+(2, 2, '19', 'Pulsa', 'Telkomsel 5K', 5000, 'Active', '5', 'PP');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_pulsas`
+--
+
+CREATE TABLE `services_pulsas` (
+  `id` int(10) NOT NULL,
+  `sid` int(10) NOT NULL,
+  `category` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `service` text COLLATE utf8_swedish_ci NOT NULL,
+  `price` int(10) NOT NULL,
+  `status` enum('Active','Not active') COLLATE utf8_swedish_ci NOT NULL,
+  `pid` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
+  `provider` varchar(50) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_cat`
+--
+
+CREATE TABLE `service_cat` (
+  `id` int(10) NOT NULL,
+  `name` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `code` varchar(500) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `service_cat`
+--
+
+INSERT INTO `service_cat` (`id`, `name`, `code`) VALUES
+(1, 'Instagram Likes', 'Instagram Likes'),
+(2, 'Instagram Followers', 'Instagram Followers'),
+(4, 'Instagram Views', 'Instagram Views'),
+(5, 'SoundCloud', 'SoundCloud'),
+(6, 'Instagram Comments', 'Instagram Comments'),
+(7, 'Facebook Post Likes / Comments / Shares DLL', 'Facebook Post Likes / Comments / Shares DLL'),
+(8, 'Youtube Likes/DisLikes/Shares', 'Youtube Likes/DisLikes/Shares'),
+(9, 'Instagram Followers Indonesia', 'Instagram Followers Indonesia'),
+(10, 'Twitter Followers', 'Twitter Followers'),
+(11, 'Instagram Auto Like+View', 'Instagram Auto Like+View'),
+(12, 'Telegram', 'Telegram'),
+(13, 'Pinterest', 'Pinterest'),
+(14, 'Google', 'Google'),
+(15, 'Instagram Story Views', 'Instagram Story Views'),
+(16, 'Instagram Story/Impressions/Saves', 'Instagram Story/Impressions/Saves'),
+(17, 'Instagram Auto Likes/Views/Comments/Impressions', 'Instagram Auto Likes/Views/Comments/Impression'),
+(18, 'Youtube Views', 'Youtube Views'),
+(19, 'Facebook Video Views / Live Stream', 'Facebook Video Views / Live Stream'),
+(20, 'Facebook Followers / Friends', 'Facebook Followers / Friends'),
+(21, 'Facebook Page / Website - Likes / Stars', 'Facebook Page / Website - Likes / Stars'),
+(22, 'Twitter Poll Votes', 'Twitter Poll Votes'),
+(23, 'Twitter Auto Retweets / Favorites / Views', 'Twitter Auto Retweets / Favorites / Views'),
+(24, 'Website Traffic', 'Website Traffic'),
+(25, 'Twitter Views & Impressions', 'Twitter Views & Impressions'),
+(26, 'Youtube Subscribers', 'Youtube Subscribers'),
+(27, 'Instagram Auto Likes - 7 Days & 30 Days Subscription', 'Instagram Auto Likes - 7 Days & 30 Days Subscription'),
+(28, 'Musical.ly', 'Musical.ly');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_rate`
+--
+
+CREATE TABLE `service_rate` (
+  `id` int(10) NOT NULL,
+  `code` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `rate` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `profit` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `id` int(10) NOT NULL,
+  `name` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `contact` varchar(1000) COLLATE utf8_swedish_ci NOT NULL,
+  `level` enum('Admin','Reseller') COLLATE utf8_swedish_ci NOT NULL,
+  `pict` text COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`id`, `name`, `contact`, `level`, `pict`) VALUES
+(1, 'KEPO', '69', 'Admin', 'http://www.anawalls.com/images/animals/baby-cub-monkey.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(10) NOT NULL,
+  `user` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `subject` varchar(200) COLLATE utf8_swedish_ci NOT NULL,
+  `message` text COLLATE utf8_swedish_ci NOT NULL,
+  `datetime` datetime NOT NULL,
+  `last_update` datetime NOT NULL,
+  `status` enum('Pending','Responded','Closed','Waiting') COLLATE utf8_swedish_ci NOT NULL,
+  `seen_user` enum('0','1') COLLATE utf8_swedish_ci NOT NULL,
+  `seen_admin` enum('0','1') COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `user`, `subject`, `message`, `datetime`, `last_update`, `status`, `seen_user`, `seen_admin`) VALUES
+(1, 'jhonsgb', 'jhjh1', 'hytrf', '2018-05-31 02:28:10', '2018-05-31 02:28:38', 'Responded', '0', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets_message`
+--
+
+CREATE TABLE `tickets_message` (
+  `id` int(10) NOT NULL,
+  `ticket_id` int(10) NOT NULL,
+  `sender` enum('Member','Admin') COLLATE utf8_swedish_ci NOT NULL,
+  `user` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `message` text COLLATE utf8_swedish_ci NOT NULL,
+  `datetime` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `tickets_message`
+--
+
+INSERT INTO `tickets_message` (`id`, `ticket_id`, `sender`, `user`, `message`, `datetime`) VALUES
+(1, 1, 'Admin', 'jhonsgb', 'Okey', '2018-05-31 02:28:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `top_user`
+--
+
+CREATE TABLE `top_user` (
+  `id` int(11) NOT NULL,
+  `method` enum('Deposit','Order') NOT NULL,
+  `username` varchar(200) NOT NULL,
+  `jumlah` int(10) NOT NULL,
+  `total` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `top_user`
+--
+
+INSERT INTO `top_user` (`id`, `method`, `username`, `jumlah`, `total`) VALUES
+(1, 'Deposit', 'deltonja', 50400, '6'),
+(2, 'Order', 'deltonja', 20100, '5'),
+(3, 'Deposit', 'jhonsgb', 16000, '1'),
+(4, 'Deposit', 'sealamo', 2147483647, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transfer_balance`
+--
+
+CREATE TABLE `transfer_balance` (
+  `id` int(10) NOT NULL,
+  `sender` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `receiver` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
+  `quantity` double NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `transfer_balance`
+--
+
+INSERT INTO `transfer_balance` (`id`, `sender`, `receiver`, `quantity`, `date`) VALUES
+(1, 'demov1', 'sealamo', 899999929999, '2018-06-01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) NOT NULL,
+  `username` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `balance` double NOT NULL,
+  `level` enum('Member','Agen','Reseller','Admin','Developers') COLLATE utf8_swedish_ci NOT NULL,
+  `registered` date NOT NULL,
+  `status` enum('Active','Suspended') COLLATE utf8_swedish_ci NOT NULL,
+  `api_key` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `uplink` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `balance`, `level`, `registered`, `status`, `api_key`, `uplink`) VALUES
+(2, 'samrey91', 'samrey91', 'samreysteven91@gmail.com', 9999999999, 'Developers', '2018-05-28', 'Active', 'gVQWrV5cilpNcM3xDIWl', 'Server'),
+(3, 'demov1', '123123', 'delton01809@gmail.com', 0, 'Developers', '2018-05-29', 'Active', 'oP27Jt1M8qDvIgS5Fizd', 'jhonsgb'),
+(4, 'sealamo', '123123', 'sealamo123@gmail.com', 899999979999, 'Admin', '2018-06-01', 'Active', 'Bbb4Guub2v8o5xnHHGVG', 'demov1'),
+(5, 'Jhonn', 'jhonn', 'delton018@gmail.com', 0, 'Member', '2018-06-01', 'Active', 'TFtNfu7p6OTvqAOdd1ui', 'Server');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userss`
+--
+
+CREATE TABLE `userss` (
+  `id` int(10) NOT NULL,
+  `username` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `balance` double NOT NULL,
+  `level` enum('Member','Agen','Reseller','Admin','Developers') COLLATE utf8_swedish_ci NOT NULL,
+  `registered` date NOT NULL,
+  `status` enum('Active','Suspended') COLLATE utf8_swedish_ci NOT NULL,
+  `api_key` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `uplink` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `balance_history`
+--
+ALTER TABLE `balance_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `berita`
+--
+ALTER TABLE `berita`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deposit`
+--
+ALTER TABLE `deposit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deposits_history`
+--
+ALTER TABLE `deposits_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deposit_method`
+--
+ALTER TABLE `deposit_method`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ip`
+--
+ALTER TABLE `ip`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders_dm`
+--
+ALTER TABLE `orders_dm`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders_line`
+--
+ALTER TABLE `orders_line`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders_pulsa`
+--
+ALTER TABLE `orders_pulsa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pesan_tsel`
+--
+ALTER TABLE `pesan_tsel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `provider`
+--
+ALTER TABLE `provider`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `provider_portal`
+--
+ALTER TABLE `provider_portal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `register_key`
+--
+ALTER TABLE `register_key`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_dm`
+--
+ALTER TABLE `services_dm`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_line`
+--
+ALTER TABLE `services_line`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_pulsa`
+--
+ALTER TABLE `services_pulsa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services_pulsas`
+--
+ALTER TABLE `services_pulsas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `service_cat`
+--
+ALTER TABLE `service_cat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `service_rate`
+--
+ALTER TABLE `service_rate`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tickets_message`
+--
+ALTER TABLE `tickets_message`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `top_user`
+--
+ALTER TABLE `top_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transfer_balance`
+--
+ALTER TABLE `transfer_balance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `userss`
+--
+ALTER TABLE `userss`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `balance_history`
+--
+ALTER TABLE `balance_history`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `berita`
+--
+ALTER TABLE `berita`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `deposit`
+--
+ALTER TABLE `deposit`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `deposits_history`
+--
+ALTER TABLE `deposits_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `deposit_method`
+--
+ALTER TABLE `deposit_method`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `ip`
+--
+ALTER TABLE `ip`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `orders_dm`
+--
+ALTER TABLE `orders_dm`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders_line`
+--
+ALTER TABLE `orders_line`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders_pulsa`
+--
+ALTER TABLE `orders_pulsa`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `pesan_tsel`
+--
+ALTER TABLE `pesan_tsel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `provider`
+--
+ALTER TABLE `provider`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `provider_portal`
+--
+ALTER TABLE `provider_portal`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `register_key`
+--
+ALTER TABLE `register_key`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `services_dm`
+--
+ALTER TABLE `services_dm`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `services_line`
+--
+ALTER TABLE `services_line`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `services_pulsa`
+--
+ALTER TABLE `services_pulsa`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `services_pulsas`
+--
+ALTER TABLE `services_pulsas`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `service_cat`
+--
+ALTER TABLE `service_cat`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tickets_message`
+--
+ALTER TABLE `tickets_message`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `top_user`
+--
+ALTER TABLE `top_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `transfer_balance`
+--
+ALTER TABLE `transfer_balance`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `userss`
+--
+ALTER TABLE `userss`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
